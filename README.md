@@ -62,6 +62,7 @@
 - 日志和知识优先用 Markdown，方便搜索和 diff。
 - 大视频不建议直接进 Git；如果要保存大量媒体，后续可以考虑 Git LFS 或云盘链接。
 - 每次同步前运行 `git status` 看是否有未提交改动。
+- 本项目默认先本地提交；推送到 GitHub 前由主人确认。
 - 推荐提交信息示例：
   - `docs: add initial cat profile`
   - `log: add 2026-07 daily notes`
