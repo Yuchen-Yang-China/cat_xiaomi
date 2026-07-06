@@ -8,6 +8,7 @@
 - 最近日常记录：`02_daily/logs/`
 - 健康总览：`03_health/README.md`
 - 应急预案：`03_health/emergency_plan.md`
+- 疑似猫癣/皮肤：`03_health/skin_ringworm.md`
 - 饮食计划：`04_nutrition/diet_plan.md`
 - 行为观察：`05_behavior_training/behavior_observations.md`
 - 训练计划：`05_behavior_training/training_plan.md`
@@ -28,6 +29,7 @@
 - `03_health/symptoms_observations.md`
 - `03_health/medications.md`
 - `03_health/vet_visits.md`
+- 皮肤/猫癣相关看 `03_health/skin_ringworm.md`
 
 然后补一份：
 

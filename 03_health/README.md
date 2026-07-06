@@ -10,6 +10,7 @@
 - `vet_visits.md`：就诊和体检记录。
 - `medications.md`：用药记录。
 - `symptoms_observations.md`：症状和异常观察。
+- `skin_ringworm.md`：疑似猫癣/皮肤问题专项记录。
 - `emergency_plan.md`：紧急情况处理预案。
 
 ## 记录原则
@@ -18,4 +19,3 @@
 - 医疗建议必须写明来源：医院、医生、日期。
 - 药物记录必须写明剂量、频率、开始/结束时间。
 - 不确定就标记 `待确认`。
-
