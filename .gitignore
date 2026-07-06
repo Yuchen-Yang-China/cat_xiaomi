@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+
+# Local editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary exports and drafts
+*.tmp
+*.bak
+exports/
+
+# Keep accidental large local-only folders out of Git.
+09_media/_local_only/
+

@@ -1,0 +1,43 @@
+project:
+  name: cat_xiaomi
+  purpose: "小咪的猫咪生活档案、知识库、问题追踪和长期养育记录"
+  primary_language: zh-CN
+
+agent_entrypoints:
+  - AGENTS.md
+  - INDEX.md
+  - 01_profile/cat_profile.md
+  - 01_profile/baseline.md
+
+areas:
+  profile:
+    path: 01_profile
+    description: "身份、成长时间线、偏好、当前基线"
+  daily:
+    path: 02_daily
+    description: "日常作息、日志和生活变化"
+  health:
+    path: 03_health
+    description: "医疗、体重、疫苗、驱虫、症状、应急"
+  nutrition:
+    path: 04_nutrition
+    description: "主食、零食、饮水、喂食记录"
+  behavior_training:
+    path: 05_behavior_training
+    description: "行为观察、训练计划、压力源、社会化"
+  environment_supplies:
+    path: 06_environment_supplies
+    description: "居家环境、用品、清洁、安全、玩具丰容"
+  knowledge:
+    path: 07_knowledge
+    description: "已学习和待验证的猫咪知识"
+  questions_decisions:
+    path: 08_questions_decisions
+    description: "问题、AI 回答、实验、决策"
+  media:
+    path: 09_media
+    description: "照片、视频、医院资料、票据"
+  templates:
+    path: 10_templates
+    description: "可复制使用的记录模板"
+
