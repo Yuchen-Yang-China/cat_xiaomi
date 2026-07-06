@@ -14,6 +14,7 @@
 - 居家环境：`06_environment_supplies/home_setup.md`
 - 知识库入口：`07_knowledge/README.md`
 - 待解问题：`08_questions_decisions/questions.md`
+- 本次导入待确认：`08_questions_decisions/confirmation_questions_2026-07-06.md`
 - 决策记录：`08_questions_decisions/decisions.md`
 - 模板目录：`10_templates/`
 
@@ -62,4 +63,3 @@
 - `08_questions_decisions/ai_answers.md`
 - `08_questions_decisions/experiments.md`
 - `08_questions_decisions/decisions.md`
-
