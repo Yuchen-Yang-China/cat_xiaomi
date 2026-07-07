@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">小咪体重变化、参考范围与短期投影</title>
+  <desc id="desc">2026-05-28 到 2026-07-03，小咪体重从 560 克增长到 1200 克；图中包含粗略参考体重带、参考中心线和按当前平均增长速度延伸到 2026-08-01 的短期投影。</desc>
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 24px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #1f2937; }
+      .subtitle { font: 14px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #4b5563; }
+      .axis { stroke: #374151; stroke-width: 1.5; }
+      .grid { stroke: #e5e7eb; stroke-width: 1; }
+      .tick { font: 12px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #4b5563; }
+      .label { font: 13px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #374151; }
+      .note { font: 12px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #6b7280; }
+      .value { font: 12px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #111827; }
+      .line { fill: none; stroke: #2563eb; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .projection { fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-dasharray: 8 6; stroke-linecap: round; }
+      .reference-line { fill: none; stroke: #64748b; stroke-width: 2; stroke-dasharray: 6 5; stroke-linecap: round; }
+      .reference-band { fill: #dcfce7; opacity: 0.7; stroke: none; }
+      .gap-line { stroke: #ef4444; stroke-width: 2; stroke-dasharray: 5 4; }
+      .actual { fill: #2563eb; stroke: #ffffff; stroke-width: 2; }
+      .estimated { fill: #ffffff; stroke: #f97316; stroke-width: 3; }
+      .projection-point { fill: #ffffff; stroke: #2563eb; stroke-width: 2.5; }
+      .legend-text { font: 13px -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #374151; }
+    </style>
+  </defs>
+  <rect class="bg" width="1000" height="620" />
+  <text class="title" x="90" y="36">小咪体重变化、参考范围与短期投影</text>
+  <text class="subtitle" x="90" y="60">记录范围：2026-05-28 到 2026-07-03；投影延伸至 2026-08-01；单位：g</text>
+
+  <!-- Plot area: x 90-880, y 80-450. Y scale: 450-2300 g. Reference band is a rough visual aid, not a diagnosis. -->
+  <line class="grid" x1="90" y1="440" x2="880" y2="440" />
+  <line class="grid" x1="90" y1="380" x2="880" y2="380" />
+  <line class="grid" x1="90" y1="320" x2="880" y2="320" />
+  <line class="grid" x1="90" y1="260" x2="880" y2="260" />
+  <line class="grid" x1="90" y1="200" x2="880" y2="200" />
+  <line class="grid" x1="90" y1="140" x2="880" y2="140" />
+  <line class="grid" x1="90" y1="80" x2="880" y2="80" />
+
+  <polygon class="reference-band" points="90.0,320.6 175.1,296.6 260.2,272.7 345.2,248.7 430.3,224.7 515.4,200.7 600.5,176.7 685.5,152.7 770.6,128.7 855.7,104.7 880.0,97.8 880.0,213.2 855.7,218.3 770.6,236.0 685.5,253.7 600.5,271.5 515.4,289.2 430.3,306.9 345.2,324.7 260.2,342.4 175.1,360.1 90.0,377.9" />
+  <polyline class="reference-line" points="90.0,349.2 175.1,328.4 260.2,307.5 345.2,286.7 430.3,265.8 515.4,244.9 600.5,224.1 685.5,203.2 770.6,182.3 855.7,161.5 880.0,155.5" />
+
+  <line class="axis" x1="90" y1="80" x2="90" y2="450" />
+  <line class="axis" x1="90" y1="450" x2="880" y2="450" />
+
+  <text class="tick" x="50" y="444">500</text>
+  <text class="tick" x="50" y="384">800</text>
+  <text class="tick" x="42" y="324">1100</text>
+  <text class="tick" x="42" y="264">1400</text>
+  <text class="tick" x="42" y="204">1700</text>
+  <text class="tick" x="42" y="144">2000</text>
+  <text class="tick" x="42" y="84">2300</text>
+
+  <text class="label" x="22" y="270" transform="rotate(-90 22 270)">体重（g）</text>
+  <text class="label" x="470" y="545">日期</text>
+
+  <polyline class="line" points="90.0,428.0 150.8,422.0 187.2,418.0 199.4,407.0 211.5,400.0 284.5,390.0 320.9,368.0 357.4,350.0 442.5,330.0 527.5,300.0" />
+  <polyline class="projection" points="527.5,300.0 880.0,196.9" />
+  <line class="gap-line" x1="527.5" y1="300.0" x2="527.5" y2="244.9" />
+
+  <circle class="actual" cx="90.0" cy="428.0" r="5.5" />
+  <circle class="actual" cx="150.8" cy="422.0" r="5.5" />
+  <circle class="actual" cx="187.2" cy="418.0" r="5.5" />
+  <circle class="actual" cx="199.4" cy="407.0" r="5.5" />
+  <circle class="actual" cx="211.5" cy="400.0" r="5.5" />
+  <circle class="estimated" cx="284.5" cy="390.0" r="5.5" />
+  <circle class="estimated" cx="320.9" cy="368.0" r="5.5" />
+  <circle class="actual" cx="357.4" cy="350.0" r="5.5" />
+  <circle class="actual" cx="442.5" cy="330.0" r="5.5" />
+  <circle class="actual" cx="527.5" cy="300.0" r="5.5" />
+  <circle class="projection-point" cx="880.0" cy="196.9" r="5.5" />
+
+  <text class="value" x="66" y="418">560</text>
+  <text class="value" x="138" y="410">590</text>
+  <text class="value" x="176" y="406">610</text>
+  <text class="value" x="206" y="412">665</text>
+  <text class="value" x="219" y="398">700</text>
+  <text class="value" x="270" y="378">约750</text>
+  <text class="value" x="305" y="356">约860</text>
+  <text class="value" x="340" y="338">950</text>
+  <text class="value" x="421" y="318">1050</text>
+  <text class="value" x="505" y="288">1200</text>
+  <text class="value" x="838" y="186">约1716</text>
+
+  <text class="value" x="538" y="257">07-03 距参考中心约 -0.29 kg</text>
+  <text class="note" x="538" y="275">距参考带下沿约 -0.07 kg</text>
+
+  <g transform="translate(90 468)">
+    <text class="tick" x="0" y="20" transform="rotate(-35 0 20)">05-28</text>
+    <text class="tick" x="122" y="20" transform="rotate(-35 122 20)">06-07</text>
+    <text class="tick" x="243" y="20" transform="rotate(-35 243 20)">06-17</text>
+    <text class="tick" x="365" y="20" transform="rotate(-35 365 20)">06-27</text>
+    <text class="tick" x="486" y="20" transform="rotate(-35 486 20)">07-07</text>
+    <text class="tick" x="608" y="20" transform="rotate(-35 608 20)">07-17</text>
+    <text class="tick" x="729" y="20" transform="rotate(-35 729 20)">07-27</text>
+    <text class="tick" x="790" y="20" transform="rotate(-35 790 20)">08-01</text>
+  </g>
+
+  <g transform="translate(90 565)">
+    <rect class="reference-band" x="0" y="-13" width="24" height="12" />
+    <text class="legend-text" x="32" y="-2">粗略参考带（参考中心线 ±15%，非诊断范围）</text>
+    <line class="reference-line" x1="330" y1="-7" x2="360" y2="-7" />
+    <text class="legend-text" x="368" y="-2">参考中心线</text>
+    <line class="projection" x1="470" y1="-7" x2="500" y2="-7" />
+    <text class="legend-text" x="508" y="-2">按当前平均增速投影</text>
+    <circle class="actual" cx="680" cy="-7" r="5.5" />
+    <text class="legend-text" x="692" y="-2">记录值</text>
+    <circle class="estimated" cx="760" cy="-7" r="5.5" />
+    <text class="legend-text" x="772" y="-2">估计值</text>
+  </g>
+
+  <text class="note" x="90" y="600">参考带用于快速对照，不等同于兽医诊断；幼猫应看连续增长、体况评分、食欲、排便和精神状态。</text>
+</svg>
