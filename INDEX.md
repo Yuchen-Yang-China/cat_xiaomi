@@ -10,6 +10,7 @@
 - 应急预案：`03_health/emergency_plan.md`
 - 疑似猫癣/皮肤：`03_health/skin_ringworm.md`
 - 饮食计划：`04_nutrition/diet_plan.md`
+- 24 小时摄入分析：`04_nutrition/reports/2026-07-07_24h_intake_analysis.md`
 - 行为观察：`05_behavior_training/behavior_observations.md`
 - 训练计划：`05_behavior_training/training_plan.md`
 - 居家环境：`06_environment_supplies/home_setup.md`
