@@ -1,68 +1,74 @@
 # 项目索引
 
-## 快速入口
+这里是主人和智能体共同使用的导航页。先看当前状态，再按需要下钻；历史快照不参与当前判断。
 
-- 小猫基础档案：`01_profile/cat_profile.md`
-- 当前基线状态：`01_profile/baseline.md`
-- 成长时间线：`01_profile/timeline.md`
-- 最近日常记录：`02_daily/logs/`
-- 健康总览：`03_health/README.md`
-- 应急预案：`03_health/emergency_plan.md`
-- 疑似猫癣/皮肤：`03_health/skin_ringworm.md`
-- 饮食计划：`04_nutrition/diet_plan.md`
-- 24 小时摄入分析：`04_nutrition/reports/2026-07-07_24h_intake_analysis.md`
-- 行为观察：`05_behavior_training/behavior_observations.md`
-- 训练计划：`05_behavior_training/training_plan.md`
-- 居家环境：`06_environment_supplies/home_setup.md`
-- 知识库入口：`07_knowledge/README.md`
-- 待解问题：`08_questions_decisions/questions.md`
-- 本次导入确认结果：`08_questions_decisions/confirmation_questions_2026-07-06.md`
-- 决策记录：`08_questions_decisions/decisions.md`
-- 模板目录：`10_templates/`
+## 30 秒了解小咪
 
-## 按场景查找
+- [本地总览看板](dashboard.html)：体重、摄入节律、近期观察和待跟进事项。
+- [当前基线](01_profile/baseline.md)：小咪平时吃、喝、睡、排泄和互动是什么样。
+- [基础档案](01_profile/cat_profile.md)：身份、当前主食、疫苗驱虫和健康摘要。
+- [近期行动队列](08_questions_decisions/action_queue.md)：下一次需要观察、确认或安排的事情。
+- [最新日常日志](02_daily/logs/2026-07.md)：最近发生了什么。
+- [当前多维分析](11_insights/reports/2026-07-13_multidimensional_snapshot.md)：这批数据能说明什么、还不能说明什么。
 
-### 小猫突然不舒服
+## 按问题查找
 
-先看：
+### 小咪突然不舒服
 
-- `03_health/emergency_plan.md`
-- `03_health/symptoms_observations.md`
-- `03_health/medications.md`
-- `03_health/vet_visits.md`
-- 皮肤/猫癣相关看 `03_health/skin_ringworm.md`
+1. 先看[应急预案](03_health/emergency_plan.md)。
+2. 对照[当前基线](01_profile/baseline.md)和[症状记录](03_health/symptoms_observations.md)。
+3. 核对[当前用药](03_health/medications.md)、[疫苗](03_health/vaccines.md)、[驱虫](03_health/deworming_flea_tick.md)和[就诊记录](03_health/vet_visits.md)。
+4. 用[症状事件模板](10_templates/symptom_event_template.md)补齐时间、吃喝、排泄、精神和照片/视频。
 
-然后补一份：
+### 想看体重、饮食或排泄趋势
 
-- `10_templates/symptom_event_template.md`
+- [体重与成长](03_health/weight_growth.md)
+- [当前饮食方案](04_nutrition/diet_plan.md)
+- [喂食记录](04_nutrition/feeding_log.md)
+- [摄入连续观察](04_nutrition/intake_observations.md)
+- [饮水记录](04_nutrition/water_hydration.md)
+- [零食与反应](04_nutrition/treats_reactions.md)
+- [24 小时摄入报告](04_nutrition/reports/2026-07-07_24h_intake_analysis.md)
 
-### 想问行为问题
+### 想理解或调整行为
 
-先看：
+- [行为观察](05_behavior_training/behavior_observations.md)
+- [当前训练计划](05_behavior_training/training_plan.md)
+- [压力源](05_behavior_training/stress_triggers.md)
+- [咬人和玩耍边界](05_behavior_training/biting_play.md)
+- [社会化与适应](05_behavior_training/socialization.md)
+- [行为事件模板](10_templates/behavior_event_template.md)
 
-- `05_behavior_training/behavior_observations.md`
-- `05_behavior_training/stress_triggers.md`
-- `05_behavior_training/training_plan.md`
-- `07_knowledge/behavior_psychology.md`
+### 想检查环境与用品
 
-然后补一份：
+- [居家环境](06_environment_supplies/home_setup.md)
+- [清洁与安全](06_environment_supplies/cleaning_safety.md)
+- [丰容与玩耍](06_environment_supplies/enrichment_play.md)
+- [梳毛与护理](06_environment_supplies/grooming.md)
+- [用品清单](06_environment_supplies/supplies_inventory.md)
 
-- `10_templates/behavior_event_template.md`
+### 想复盘一次选择
 
-### 想调整饮食
+- [开放问题](08_questions_decisions/questions.md)
+- [行动队列](08_questions_decisions/action_queue.md)
+- [实验记录](08_questions_decisions/experiments.md)
+- [决策记录](08_questions_decisions/decisions.md)
+- [历史 AI 回答](08_questions_decisions/ai_answers.md)
 
-先看：
+## 数据与生成物
 
-- `04_nutrition/diet_plan.md`
-- `04_nutrition/feeding_log.md`
-- `04_nutrition/treats_reactions.md`
-- `03_health/weight_growth.md`
+- [跨维度洞察说明](11_insights/README.md)
+- [当前派生数据](11_insights/data/current_snapshot.json)
+- [饮食数据目录](04_nutrition/data/)
+- [图表与脱敏附件](09_media/README.md)
+- [看板构建脚本](scripts/build_dashboard.py)
+- [仓库优化路线图](ROADMAP.md)
 
-### 想复盘一个选择
+数据类型统一为：记录值、观察值、估算值、推断值和参考值。`11_insights/` 与 `dashboard.html` 是展示层；出现冲突时，应回到带日期的原始记录核对。
 
-先看：
+## 历史入口
 
-- `08_questions_decisions/questions.md`
-- `08_questions_decisions/ai_answers.md`
-- `08_questions_decisions/experiments.md`
-- `08_questions_decisions/decisions.md`
+- [2026-07-06 导入确认快照](08_questions_decisions/confirmation_questions_2026-07-06.md)
+- [成长时间线](01_profile/timeline.md)
+- [知识库](07_knowledge/README.md)
+- [全部模板](10_templates/README.md)

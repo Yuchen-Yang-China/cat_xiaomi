@@ -5,7 +5,7 @@
 ## 文件说明
 
 - `questions.md`：待解决问题。
+- `action_queue.md`：需要观察、确认或按日期安排的下一步。
 - `ai_answers.md`：重要 AI 回答摘要和引用。
 - `experiments.md`：小范围尝试和观察结果。
 - `decisions.md`：最终决定和原因。
-

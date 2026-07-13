@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="小咪的离线生活档案与多维照护看板">
+  <title>小咪当前多维照护快照</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6f2;
+      --surface: #ffffff;
+      --surface-soft: #eaf1ed;
+      --ink: #17211c;
+      --muted: #5d6b63;
+      --line: #cdd8d1;
+      --green: #27705c;
+      --green-soft: #dbece5;
+      --coral: #c85f49;
+      --coral-soft: #f5ded8;
+      --gold: #a77d20;
+      --gold-soft: #f2e8c9;
+      --blue: #397896;
+      --blue-soft: #dcebf2;
+      --purple: #775f8f;
+      --purple-soft: #e9e0ef;
+      --shadow: 0 8px 28px rgba(24, 45, 35, 0.08);
+      --radius: 8px;
+      --max: 1180px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #101713;
+        --surface: #17211b;
+        --surface-soft: #1e2b24;
+        --ink: #edf4ef;
+        --muted: #aab9b0;
+        --line: #33463b;
+        --green: #72bca3;
+        --green-soft: #233f35;
+        --coral: #e5927f;
+        --coral-soft: #4a2e28;
+        --gold: #d7b85f;
+        --gold-soft: #463c21;
+        --blue: #7db3cf;
+        --blue-soft: #263f4c;
+        --purple: #b7a2cc;
+        --purple-soft: #3d3346;
+        --shadow: 0 10px 32px rgba(0, 0, 0, 0.24);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.62;
+      letter-spacing: 0;
+    }
+    a { color: var(--green); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    button, input { font: inherit; }
+    button:focus-visible, a:focus-visible, summary:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--green) 46%, transparent);
+      outline-offset: 3px;
+    }
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 10;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .skip-link:focus { top: 12px; }
+    .shell { width: min(calc(100% - 32px), var(--max)); margin-inline: auto; }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 91%, transparent);
+    }
+    .topbar-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+    }
+    .brand-mark svg { width: 20px; height: 20px; }
+    nav { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 9px;
+      border-radius: 6px;
+    }
+    nav a:hover { background: var(--surface-soft); color: var(--ink); }
+
+    .intro {
+      padding: 52px 0 38px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr);
+      gap: 44px;
+      align-items: end;
+    }
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--green);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 760px;
+      margin-bottom: 14px;
+      font-size: 4.3rem;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+    h2 { margin-bottom: 8px; font-size: 2.25rem; line-height: 1.2; }
+    h3 { margin-bottom: 8px; font-size: 1.04rem; line-height: 1.35; }
+    .lede { max-width: 760px; margin-bottom: 0; color: var(--muted); font-size: 1.08rem; }
+    .profile-strip {
+      margin: 0;
+      padding: 18px 0 2px 20px;
+      border-left: 3px solid var(--green);
+      display: grid;
+      gap: 11px;
+    }
+    .profile-strip div { display: grid; grid-template-columns: 90px 1fr; gap: 10px; }
+    .profile-strip dt { color: var(--muted); }
+    .profile-strip dd { margin: 0; font-weight: 650; }
+
+    main { padding-bottom: 80px; }
+    section { padding: 42px 0; border-top: 1px solid var(--line); }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .section-head > div:first-child { max-width: 750px; }
+    .section-head p { margin-bottom: 0; color: var(--muted); }
+    .as-of { color: var(--muted); font-size: 0.88rem; white-space: nowrap; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      min-width: 0;
+      padding: 17px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .metric-label { color: var(--muted); font-size: 0.86rem; }
+    .metric-value {
+      margin: 4px 0 2px;
+      font-size: 2rem;
+      font-weight: 760;
+      line-height: 1.18;
+      overflow-wrap: anywhere;
+    }
+    .metric-meta { color: var(--muted); font-size: 0.8rem; }
+    .metric a { display: inline-block; margin-top: 8px; font-size: 0.8rem; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-recorded { background: var(--green-soft); color: var(--green); }
+    .badge-observed { background: var(--blue-soft); color: var(--blue); }
+    .badge-estimated { background: var(--gold-soft); color: var(--gold); }
+    .badge-inferred { background: var(--purple-soft); color: var(--purple); }
+    .badge-reference { background: var(--coral-soft); color: var(--coral); }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.45fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .chart-wrap {
+      position: relative;
+      min-height: 360px;
+      padding: 12px 0 0;
+    }
+    #weight-chart { width: 100%; height: auto; display: block; overflow: visible; }
+    .chart-line { fill: none; stroke: var(--green); stroke-width: 3; }
+    .chart-area { fill: color-mix(in srgb, var(--green) 12%, transparent); }
+    .chart-gridline { stroke: var(--line); stroke-width: 1; }
+    .chart-axis-label, .chart-tick { fill: var(--muted); font-size: 12px; }
+    .chart-point { stroke: var(--surface); stroke-width: 3; fill: var(--green); }
+    .chart-point.estimated { fill: var(--surface); stroke: var(--gold); stroke-width: 3; }
+    .chart-value-label { fill: var(--ink); font-size: 12px; font-weight: 700; }
+    .chart-detail {
+      min-height: 48px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+    .chart-detail strong { color: var(--ink); }
+    .segmented {
+      display: inline-flex;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-soft);
+    }
+    .segmented button, .filters button {
+      border: 0;
+      border-radius: 5px;
+      padding: 6px 10px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+    }
+    .segmented button[aria-pressed="true"], .filters button[aria-pressed="true"] {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+    .analysis-list { display: grid; gap: 18px; }
+    .analysis-item { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .analysis-item:last-child { border-bottom: 0; }
+    .analysis-item .value { font-size: 1.45rem; font-weight: 760; line-height: 1.2; }
+    .analysis-item p { margin-bottom: 0; color: var(--muted); }
+
+    details { margin-top: 16px; }
+    summary { color: var(--green); cursor: pointer; font-weight: 700; }
+    .table-wrap { overflow-x: auto; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { color: var(--muted); font-weight: 650; }
+
+    .rhythm-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 32px;
+      align-items: start;
+    }
+    .rhythm-callout {
+      margin-bottom: 24px;
+      padding-left: 18px;
+      border-left: 3px solid var(--coral);
+    }
+    .rhythm-callout strong { display: block; font-size: 1.35rem; line-height: 1.3; }
+    .stacked-bar {
+      display: flex;
+      width: 100%;
+      height: 42px;
+      overflow: hidden;
+      border-radius: 7px;
+      background: var(--surface-soft);
+    }
+    .stacked-segment { min-width: 2px; position: relative; }
+    .stacked-segment:nth-child(1) { background: var(--purple); }
+    .stacked-segment:nth-child(2) { background: var(--blue); }
+    .stacked-segment:nth-child(3) { background: var(--gold); }
+    .stacked-segment:nth-child(4) { background: var(--coral); }
+    .stacked-segment:nth-child(5) { background: var(--green); }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px;
+      margin-top: 14px;
+    }
+    .legend-item { display: grid; grid-template-columns: 12px 1fr auto; gap: 7px; align-items: center; font-size: 0.84rem; }
+    .swatch { width: 10px; height: 10px; border-radius: 2px; }
+    .legend-item:nth-child(1) .swatch { background: var(--purple); }
+    .legend-item:nth-child(2) .swatch { background: var(--blue); }
+    .legend-item:nth-child(3) .swatch { background: var(--gold); }
+    .legend-item:nth-child(4) .swatch { background: var(--coral); }
+    .legend-item:nth-child(5) .swatch { background: var(--green); }
+    .legend-value { color: var(--muted); }
+    .fine-print { margin-top: 12px; color: var(--muted); font-size: 0.82rem; }
+    .bowl-comparison { display: grid; gap: 14px; }
+    .bowl-row { display: grid; grid-template-columns: 76px 1fr 62px; gap: 10px; align-items: center; }
+    .bowl-track { height: 12px; background: var(--surface-soft); border-radius: 4px; overflow: hidden; }
+    .bowl-fill { height: 100%; background: var(--blue); border-radius: inherit; }
+    .bowl-row:nth-child(2) .bowl-fill { background: var(--gold); }
+
+    .dimension-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .dimension-card {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .dimension-card dl { margin: 0; display: grid; gap: 13px; }
+    .dimension-card dt { color: var(--muted); font-size: 0.78rem; font-weight: 700; }
+    .dimension-card dd { margin: 2px 0 0; }
+    .dimension-card .next { padding-top: 12px; border-top: 1px solid var(--line); color: var(--green); font-weight: 650; }
+
+    .clues { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; margin-top: 34px; }
+    .clue { padding-top: 16px; border-top: 3px solid var(--line); }
+    .clue p { margin-bottom: 7px; }
+    .clue .limit { color: var(--muted); font-size: 0.86rem; }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
+    .filters button { border: 1px solid var(--line); }
+    .followup-list { display: grid; gap: 10px; }
+    .followup {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr) minmax(250px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+      padding: 17px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .followup[hidden] { display: none; }
+    .followup-state { display: grid; gap: 7px; justify-items: start; }
+    .attention { font-size: 0.78rem; color: var(--muted); }
+    .followup p { margin-bottom: 6px; color: var(--muted); }
+    .followup .action { color: var(--ink); }
+    .followup .escalate { color: var(--coral); font-size: 0.86rem; }
+    .followup a { font-size: 0.8rem; }
+
+    .timeline { position: relative; display: grid; gap: 0; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 91px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--line);
+    }
+    .timeline-item { display: grid; grid-template-columns: 74px 34px minmax(0, 1fr); gap: 0; padding: 0 0 24px; }
+    .timeline-date { color: var(--muted); font-size: 0.84rem; }
+    .timeline-dot {
+      position: relative;
+      z-index: 1;
+      justify-self: center;
+      width: 11px;
+      height: 11px;
+      margin-top: 7px;
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 1px var(--green);
+    }
+    .timeline-content p { margin-bottom: 4px; color: var(--muted); }
+    .timeline-content a { font-size: 0.8rem; }
+
+    .source-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .source-group ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+    .source-group a { display: inline-flex; align-items: center; gap: 8px; }
+    .source-group a::after { content: "↗"; font-size: 0.8rem; }
+    .footer-note { margin: 30px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.84rem; }
+
+    @media (max-width: 900px) {
+      .intro, .chart-grid, .rhythm-grid { grid-template-columns: 1fr; }
+      .intro { gap: 28px; }
+      h1 { font-size: 3.35rem; }
+      h2 { font-size: 2rem; }
+      .metric-value { font-size: 1.8rem; }
+      .profile-strip { max-width: 600px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .followup { grid-template-columns: 110px minmax(0, 1fr); }
+      .followup > div:last-child { grid-column: 2; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(calc(100% - 24px), var(--max)); }
+      .topbar-inner { align-items: flex-start; padding: 13px 0; }
+      nav { display: none; }
+      .intro { padding: 38px 0 30px; }
+      h1 { font-size: 2.45rem; }
+      section { padding: 34px 0; }
+      .section-head { align-items: start; flex-direction: column; gap: 12px; }
+      .metrics, .dimension-grid, .clues, .source-groups { grid-template-columns: 1fr; }
+      .legend { grid-template-columns: 1fr; }
+      .followup { grid-template-columns: 1fr; gap: 10px; }
+      .followup > div:last-child { grid-column: auto; }
+      .profile-strip div { grid-template-columns: 82px 1fr; }
+      .chart-wrap { min-height: 270px; }
+      .timeline::before { left: 79px; }
+      .timeline-item { grid-template-columns: 62px 34px minmax(0, 1fr); }
+    }
+
+    @media (max-width: 390px) {
+      .metrics { grid-template-columns: 1fr; }
+      .segmented { width: 100%; }
+      .segmented button { flex: 1; }
+      .bowl-row { grid-template-columns: 68px 1fr 56px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top" aria-label="返回小咪看板顶部">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M7 10 5 4l5 3.2h4L19 4l-2 6c1.1 1.1 1.7 2.5 1.7 4 0 3.6-3 6-6.7 6s-6.7-2.4-6.7-6c0-1.5.6-2.9 1.7-4Z"/>
+            <path d="M9 14h.01M15 14h.01M10 17c1.3.7 2.7.7 4 0"/>
+          </svg>
+        </span>
+        小咪档案
+      </a>
+      <nav aria-label="页面导航">
+        <a href="#growth">生长</a>
+        <a href="#rhythm">饮食节律</a>
+        <a href="#dimensions">多维观察</a>
+        <a href="#followups">待跟进</a>
+        <a href="#sources">档案入口</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="top" class="shell">
+    <div class="intro">
+      <div>
+        <p class="eyebrow">档案截至 2026-07-13</p>
+        <h1>小咪正在稳稳长大。</h1>
+        <p class="lede">她的体重、食欲和排泄已经有了一条可追踪的基线，晚上也显出很鲜明的活跃与进食节律。现在最值得温柔地继续留意的，是皮肤、耳眼鼻，以及地面长发和线状物。</p>
+      </div>
+      <dl class="profile-strip" id="profile-strip" aria-label="小咪基础信息"></dl>
+    </div>
+  </div>
+
+  <main id="main" class="shell">
+    <section aria-labelledby="snapshot-title">
+      <div class="section-head">
+        <div>
+          <h2 id="snapshot-title">先看这几条基线</h2>
+          <p>每个数字都保留时间窗口和数据性质；“水碗减少量”不会被写成精确饮水量。</p>
+        </div>
+        <span class="as-of">一次摄入观察 n=1</span>
+      </div>
+      <div class="metrics" id="metrics"></div>
+    </section>
+
+    <section id="growth" aria-labelledby="growth-title">
+      <div class="section-head">
+        <div>
+          <h2 id="growth-title">小咪最近长得怎么样</h2>
+          <p>从到家时的 560 g 到最近的 1300 g，方向持续向上。短间隔的跳动不单独当作生理增速解读。</p>
+        </div>
+        <div class="segmented" aria-label="体重图数据范围">
+          <button type="button" data-weight-mode="all" aria-pressed="true">含估计点</button>
+          <button type="button" data-weight-mode="recorded" aria-pressed="false">仅记录值</button>
+        </div>
+      </div>
+      <div class="chart-grid">
+        <div>
+          <div class="chart-wrap">
+            <svg id="weight-chart" viewBox="0 0 760 360" role="img" aria-labelledby="weight-chart-title weight-chart-desc">
+              <title id="weight-chart-title">小咪体重变化折线图</title>
+              <desc id="weight-chart-desc">显示 2026-05-30 至 2026-07-10 的体重记录，估计日期使用空心点。</desc>
+            </svg>
+          </div>
+          <p class="chart-detail" id="weight-detail" aria-live="polite"></p>
+          <details>
+            <summary>查看全部体重数据</summary>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>日期</th><th>日龄</th><th>体重</th><th>类型</th><th>备注</th></tr></thead>
+                <tbody id="weight-table"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div class="analysis-list" id="growth-summary"></div>
+      </div>
+    </section>
+
+    <section id="rhythm" aria-labelledby="rhythm-title">
+      <div class="section-head">
+        <div>
+          <h2 id="rhythm-title">她什么时候最爱吃</h2>
+          <p>一次完整观察里，傍晚到夜间的摄入明显集中，和她晚上爱玩的习惯对得上。</p>
+        </div>
+        <a href="04_nutrition/reports/2026-07-07_24h_intake_analysis.md">打开完整报告</a>
+      </div>
+      <div class="rhythm-grid">
+        <div>
+          <div class="rhythm-callout" id="rhythm-callout"></div>
+          <div class="stacked-bar" id="rhythm-bar" role="img" aria-label="一次 24 小时观察的进食时段估算分布"></div>
+          <div class="legend" id="rhythm-legend"></div>
+          <p class="fine-print" id="rhythm-limitation"></p>
+        </div>
+        <div>
+          <h3>两只水碗的减少量</h3>
+          <div class="bowl-comparison" id="bowl-comparison"></div>
+          <p class="fine-print" id="bowl-limitation"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="dimensions" aria-labelledby="dimensions-title">
+      <div class="section-head">
+        <div>
+          <h2 id="dimensions-title">四个维度一起看</h2>
+          <p>每一块都分清“看到了什么、意味着什么、还不能说明什么、下一次怎么记”。</p>
+        </div>
+      </div>
+      <div class="dimension-grid" id="dimension-grid"></div>
+      <div class="clues" id="clues" aria-label="跨维度线索"></div>
+    </section>
+
+    <section id="followups" aria-labelledby="followups-title">
+      <div class="section-head">
+        <div>
+          <h2 id="followups-title">这周一起留意</h2>
+          <p>这些是观察和计划入口，不是诊断清单。高风险信号出现时仍以兽医判断为准。</p>
+        </div>
+        <a href="08_questions_decisions/action_queue.md">打开行动队列</a>
+      </div>
+      <div class="filters" id="followup-filters" aria-label="筛选待跟进事项"></div>
+      <div class="followup-list" id="followup-list"></div>
+    </section>
+
+    <section aria-labelledby="timeline-title">
+      <div class="section-head">
+        <div>
+          <h2 id="timeline-title">最近发生的事</h2>
+          <p>从新食物、排便到体重和疫苗，按日期回到原始记录。</p>
+        </div>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section id="sources" aria-labelledby="sources-title">
+      <div class="section-head">
+        <div>
+          <h2 id="sources-title">继续翻小咪的档案</h2>
+          <p>看板只是入口。想核对细节时，直接打开对应的 Markdown 原始记录。</p>
+        </div>
+      </div>
+      <div class="source-groups" id="source-groups"></div>
+      <p class="footer-note">本页由 <code>11_insights/data/current_snapshot.json</code> 生成。数据截至 2026-07-13；若源记录更新而看板未同步，请运行 <code>python3 scripts/build_dashboard.py</code>。医疗与用药相关决定以兽医面诊和当次医嘱为准。</p>
+    </section>
+  </main>
+
+  <script type="application/json" id="xiaomi-data">{"schema_version":1,"meta":{"as_of":"2026-07-13","title":"小咪当前多维照护快照","record_window":"2026-05-30 至 2026-07-13","purpose":"将现有记录整理成可追溯的趋势、线索和行动入口","medical_boundary":"派生分析不等于诊断；健康与用药相关决定以兽医面诊和当次医嘱为准","source_of_truth":"带日期的月度日志和专题记录","sample_warning":"摄入与水碗分析目前只有一次 24 小时核心观察，n=1"},"profile":{"name":"小咪","sex":"母猫","birth_date":"2026-03-25","age_days_as_of":110,"age_label_as_of":"3 个月 18 天","arrival_date":"2026-05-30","coat":"紫金渐层","latest_weight_g":1300,"latest_weight_at":"2026-07-10 22:21","source":"01_profile/cat_profile.md"},"evidence_types":[{"id":"recorded","label":"记录值","description":"有日期和数值的记录；测量方式仍可能缺失"},{"id":"observed","label":"观察值","description":"主人直接观察或回顾的现象，没有精密测量"},{"id":"estimated","label":"估算值","description":"由插值、折算或假设得到"},{"id":"inferred","label":"推断值","description":"由多条记录形成的解释，不代表因果"},{"id":"reference","label":"参考值","description":"外部资料或产品信息，只用于对照"}],"headline_metrics":[{"id":"latest_weight","dimension":"生长","label":"最近体重","value":1300,"unit":"g","display":"1.30 kg","window":"2026-07-10 22:21","evidence_type":"recorded","source":"03_health/weight_growth.md","limitation":"称重工具未记录"},{"id":"growth_three_weeks","dimension":"生长","label":"近三周平均增重","value":116.7,"unit":"g/week","display":"116.7 g/周","window":"2026-06-19 至 2026-07-10","evidence_type":"estimated","source":"03_health/weight_growth.md","limitation":"按三个相隔 7 天的记录区间计算"},{"id":"dry_food_24h","dimension":"营养","label":"24 小时干粮","value":51.36,"unit":"g/24h","display":"51.4 g","window":"2026-07-07 00:25 至 2026-07-08 00:29","evidence_type":"estimated","source":"04_nutrition/intake_observations.md","limitation":"由 24 小时 4 分钟的 51.5 g 折算；冻干未计"},{"id":"gross_bowl_loss_24h","dimension":"饮水","label":"24 小时水碗减少量","value":104.21,"unit":"ml/24h","display":"约 104.2 ml","window":"2026-07-07 00:25 至 2026-07-08 00:29","evidence_type":"estimated","source":"04_nutrition/water_hydration.md","limitation":"包含蒸发、溅出和沾水误差，不等于饮水量"},{"id":"urine_baseline","dimension":"排泄","label":"每日尿团基线","value_min":4,"value_max":5,"unit":"个/日","display":"约 4-5 个","window":"截至 2026-07-07 的日常观察","evidence_type":"observed","source":"05_behavior_training/litter_box.md","limitation":"未同步称重尿团"},{"id":"stool_baseline","dimension":"排泄","label":"每日大便基线","value_min":1,"value_max":2,"unit":"团/日","display":"约 1-2 团","window":"截至 2026-07-07 的日常观察","evidence_type":"observed","source":"05_behavior_training/litter_box.md","limitation":"以成型便为当前基线，曾有新食物相关软便/拖便"},{"id":"evening_food_share","dimension":"作息","label":"晚间核心窗口进食占比","value":38.8,"unit":"%","display":"38.8%","window":"2026-07-07 19:37 至 2026-07-08 00:29","evidence_type":"estimated","source":"04_nutrition/reports/2026-07-07_24h_intake_analysis.md","limitation":"占一次核心 24 小时记录；不能直接视为长期作息"}],"growth":{"summary":{"start_date":"2026-05-30","end_date":"2026-07-10","elapsed_days_by_date":41,"calendar_dates_covered":42,"start_weight_g":560,"end_weight_g":1300,"gain_g":740,"gain_percent":132.1,"daily_gain_by_date_g":18.05,"daily_gain_range_g":[17.65,18.08],"three_week_gain_g":350,"three_week_daily_gain_g":16.67,"three_week_weekly_gain_g":116.7,"direction":"持续上升，现有节点没有停滞或下降","limitation":"起点称重时刻和称重工具缺失；短间隔变化混有进食、排泄和测量误差"},"weight_history":[{"date":"2026-05-30","age_days":66,"weight_g":560,"value_type":"recorded","date_precision":"day","note":"到家第一天；称重时刻和工具待确认"},{"date":"2026-06-02","age_days":69,"weight_g":590,"value_type":"recorded","date_precision":"day","note":"主人确认"},{"date":"2026-06-05","age_days":72,"weight_g":610,"value_type":"recorded","date_precision":"day","note":"主人确认"},{"date":"2026-06-06","age_days":73,"weight_g":665,"value_type":"recorded","date_precision":"day","note":"主人确认；单日变化不作生理增速解读"},{"date":"2026-06-07","age_days":74,"weight_g":700,"value_type":"recorded","date_precision":"day","note":"主人确认；单日变化不作生理增速解读"},{"date":"2026-06-13","age_days":80,"weight_g":750,"value_type":"estimated","date_precision":"estimated_day","note":"由 6 月中旬估计，精确日期不再追溯"},{"date":"2026-06-16","age_days":83,"weight_g":860,"value_type":"estimated","date_precision":"estimated_day","note":"由 6 月中下旬估计，精确日期不再追溯"},{"date":"2026-06-19","age_days":86,"weight_g":950,"value_type":"recorded","date_precision":"day","note":"主人确认"},{"date":"2026-06-26","age_days":93,"weight_g":1050,"value_type":"recorded","date_precision":"day","note":"体重突破 1 kg"},{"date":"2026-07-03","age_days":100,"weight_g":1200,"value_type":"recorded","date_precision":"day","note":"首针疫苗当天；称重时刻待确认"},{"date":"2026-07-10","observed_at":"2026-07-10 22:21","age_days":107,"weight_g":1300,"value_type":"recorded","date_precision":"minute","note":"主人新增记录"}],"weekly_intervals":[{"start":"2026-06-19","end":"2026-06-26","days":7,"gain_g":100,"daily_gain_g":14.29},{"start":"2026-06-26","end":"2026-07-03","days":7,"gain_g":150,"daily_gain_g":21.43},{"start":"2026-07-03","end":"2026-07-10","days":7,"gain_g":100,"daily_gain_g":14.29}],"source":"03_health/weight_growth.md"},"nutrition_and_rhythm":{"core_window":{"start":"2026-07-07 00:25","end":"2026-07-08 00:29","minutes":1444,"dry_food_consumed_g":51.5,"normalized_dry_food_g_per_24h":51.36,"estimated_body_weight_kg":1.25,"estimated_dry_food_g_per_kg_day":41.09,"assumed_energy_kcal_per_g":4.2,"estimated_energy_kcal_per_day":215.7,"energy_evidence_type":"reference","food_energy_limitation":"包装实际代谢能待核对；冻干奖励未计入","sample_size_days":1},"direct_evening_window":{"start":"2026-07-07 19:37","end":"2026-07-08 00:29","hours":4.87,"consumed_g":20,"share_percent":38.8,"rate_g_per_hour":4.11,"other_window_rate_g_per_hour":1.64,"rate_ratio":2.5,"evidence_type":"estimated","interpretation":"晚间进食更集中，与夜间活跃观察方向一致","limitation":"只有一天；占比由区间总量推导"},"clock_segments":[{"label":"凌晨 00-06","hours":5.58,"grams":6.99,"share_percent":13.6,"rate_g_per_hour":1.25},{"label":"上午 06-12","hours":6,"grams":8.81,"share_percent":17.1,"rate_g_per_hour":1.47},{"label":"下午 12-18","hours":6,"grams":12.37,"share_percent":24,"rate_g_per_hour":2.06},{"label":"晚上 18-24","hours":6,"grams":21.9,"share_percent":42.5,"rate_g_per_hour":3.65},{"label":"次日 00-00:29","hours":0.48,"grams":1.43,"share_percent":2.8,"rate_g_per_hour":2.97}],"clock_segments_limitation":"称重区间内假设匀速进食，仅用于展示一次观察的节律，不是逐小时实测","water_bowls":{"gross_loss_ml":104.5,"normalized_gross_loss_ml_per_24h":104.21,"estimated_gross_loss_ml_per_kg_day":83.37,"white_bowl_loss_ml":48,"yellow_bowl_loss_ml":56.5,"white_share_percent":45.9,"yellow_share_percent":54.1,"evidence_type":"estimated","limitation":"水碗质量减少近似按 1 g=1 ml 折算，包含蒸发、泼洒和沾水，不能判断饮水偏好或精确饮水量"},"sources":["04_nutrition/intake_observations.md","04_nutrition/reports/2026-07-07_24h_intake_analysis.md","04_nutrition/data/2026-07-07_clock_distribution.csv","04_nutrition/data/2026-07-07_water_bowls.csv"]},"elimination":{"urine_clumps_per_day":{"min":4,"max":5,"size":"近乒乓球大小","evidence_type":"observed"},"stools_per_day":{"min":1,"max":2,"usual_form":"成型小香肠状","evidence_type":"observed"},"litter_box_use":"稳定使用","recent_note":"2026-07-13 记录昨晚排便正常，早上两个尿团（一大一正常）","limitation":"没有与水碗观察同步的尿团重量；单次大尿团不能代表尿量增加","sources":["01_profile/baseline.md","05_behavior_training/litter_box.md","02_daily/logs/2026-07.md"]},"dimensions":[{"id":"health","label":"健康与生长","observed":"体重持续增加；当前没有记录到体重停滞或下降。已接种首针疫苗，目前没有明确正在使用的药物。","meaning":"生长方向和一次摄入记录彼此协调，适合继续按周看趋势。","limitation":"疑似皮肤问题未复查，耳眼鼻表现未确诊，也没有完整体检结果。","next":"重新观察三处皮肤；下次就诊带上耳眼鼻照片和频率记录。"},{"id":"nutrition","label":"营养与排泄","observed":"一次 24 小时核心观察中，干粮约 51.4 g；日常约 4-5 个尿团、1-2 团成型便。","meaning":"这一天没有吃空碗，记录本身不支持吃粮不足；排泄有可用基线。","limitation":"只有一天精确摄入；冻干未计，湿粮实际吃下量和包装能量未记录。","next":"下次湿粮日记录提供量、剩余量、加水量和当天干粮摄入。"},{"id":"behavior","label":"行为与情绪","observed":"白天偏睡、夜间活跃；有玩耍咬手、经常舔人和物品、单次猫条呜声，也能在低唤醒时接受触碰。","meaning":"高唤醒时更适合玩耍和重定向，安静时更适合护理脱敏。","limitation":"多数行为没有次数分母，暂时不能计算频率或训练改善率。","next":"优先只追踪 1-2 个活跃目标，并记成功次数和失败场景。"},{"id":"environment","label":"环境与照护","observed":"已知有 4 个常用休息点、2 个水碗、至少 1 个受惊躲藏点和逗猫棒互动；每天换水。","meaning":"小咪已有多个可选择的休息位置；长发暴露与拖便记录让线状物管理成为当前优先项。","limitation":"猫砂配置、门窗、植物、清洁剂、抓挠和垂直空间仍是资料未知，不代表现实中没有。","next":"先补安全相关基线，再逐步补用品品牌和非关键细节。"}],"cross_dimension_clues":[{"title":"夜间活动与进食同向","evidence":"19:37 至 00:29 吃了 20 g，接近核心全天四成；日常记录也显示晚上更活跃。","interpretation":"这是很有意思的初步节律线索。","limitation":"摄入只观察了一天，不能定义为长期稳定作息。","sources":["04_nutrition/intake_observations.md","02_daily/sleep_activity.md"]},{"title":"生长与摄入方向协调","evidence":"体重持续上升，同时一次 24 小时记录中食物始终可得且摄入稳定。","interpretation":"现有记录没有呈现体重停滞或明显进食不足。","limitation":"两类数据窗口不同，不能计算相关性或证明因果。","sources":["03_health/weight_growth.md","04_nutrition/intake_observations.md"]},{"title":"舔舐、长发暴露与拖便形成安全链条","evidence":"记录到经常舔非食物表面、地面长发可得，以及至少一次长发伴随拖便。","interpretation":"环境清扫和线状物收纳比单纯制止舔舐更优先。","limitation":"没有直接看到吞食过程，仍应写作疑似。","sources":["05_behavior_training/behavior_observations.md","06_environment_supplies/home_setup.md"]},{"title":"多变量事件不能拆分归因","evidence":"洗澡和猫薄荷是同次暴露，随后记录亢奋、高频呼吸和软便；两种虾和三文鱼也是同日尝试。","interpretation":"今后一次只改变一个变量，反应会更容易判断。","limitation":"现有记录不能分别确认哪一个变量导致反应，也不能分别确认每种新食物耐受。","sources":["03_health/symptoms_observations.md","04_nutrition/treats_reactions.md"]}],"followups":[{"id":"skin_recheck","dimension":"健康","attention_level":"中","title":"三处疑似皮肤问题待复查","status":"待复查","observed":"头顶、左脸、左手关节曾在涂药前紫外灯下发绿，未兽医确诊。","next":"同光线拍照并记录脱毛、红、痂、痒和是否扩大。","escalate":"持续、扩散或复发时预约兽医检查，不自行恢复旧药方案。","source":"03_health/skin_ringworm.md"},{"id":"eyes_nose_ears","dimension":"健康","attention_level":"中","title":"耳眼鼻表现待确认","status":"持续观察","observed":"每天少量眼屎和黑色鼻屎、非常偶尔喷嚏，耳朵略脏。","next":"记录颜色、量、气味、抓耳甩头和喷嚏频率；下次就诊检查。","escalate":"眼痛/眯眼、黄绿分泌物、食欲或精神下降时提前联系兽医。","source":"03_health/symptoms_observations.md"},{"id":"linear_object_safety","dimension":"环境","attention_level":"低，需观察","title":"线状异物暴露","status":"环境调整中","observed":"至少一次疑似吞食长头发并在排便时拖便。","next":"提高清扫频率，收好线、绳、发圈和牙线。","escalate":"若线状物从肛门露出不要拉；伴呕吐、不吃、腹痛、精神差或排便困难时尽快联系兽医。","source":"06_environment_supplies/home_setup.md"},{"id":"deworming_confirm","dimension":"健康","attention_level":"计划","title":"确认下一次驱虫方案","status":"待确认","observed":"上次吡虫啉莫昔克丁约为 2026-06-19，历史产品规格缺失。","next":"约 2026-07-19 前后，按当日体重、产品全名和规格与兽医确认。","escalate":"不要复制历史剂量或叠加多个体外驱虫产品。","source":"03_health/deworming_flea_tick.md"},{"id":"vaccine_second","dimension":"健康","attention_level":"计划","title":"妙三多第二针","status":"计划中","observed":"第一针于 2026-07-03 接种。","next":"计划 2026-08-01 接种，执行前确认预约和当天健康状态。","escalate":"实际安排及接种条件以当次兽医判断为准。","source":"03_health/vaccines.md"},{"id":"environment_baseline","dimension":"环境","attention_level":"资料缺口","title":"补齐关键环境基线","status":"待补充","observed":"猫砂、门窗、植物、清洁剂、抓挠和垂直空间资料尚不完整。","next":"先记录安全相关项；可用区域名称，不记录精确住址。","escalate":"未知只代表没有记录，不应推断成资源缺失。","source":"06_environment_supplies/home_setup.md"}],"recent_timeline":[{"date":"2026-07-13","category":"日常","title":"新食物后短期未见异常","detail":"昨晚排便正常；早上两个尿团，一大一正常。继续完成 24-48 小时观察。","source":"02_daily/logs/2026-07.md"},{"date":"2026-07-12","category":"饮食","title":"尝试熟虾和少量熟三文鱼","detail":"同日加入多个变量，暂时不能分别确认每种食物耐受。","source":"04_nutrition/treats_reactions.md"},{"date":"2026-07-12","category":"环境","title":"疑似长头发拖便","detail":"把线状物清理与收纳列为当前环境优先项。","source":"03_health/symptoms_observations.md"},{"date":"2026-07-10","category":"生长","title":"体重 1300 g","detail":"较 2026-07-03 增加约 100 g。","source":"03_health/weight_growth.md"},{"date":"2026-07-07","category":"数据","title":"开始 24 小时摄入观察","detail":"记录猫粮和两只水碗，形成当前唯一一次完整核心窗口。","source":"04_nutrition/intake_observations.md"},{"date":"2026-07-03","category":"医疗","title":"妙三多第一针","detail":"回家后感觉较困，晚上恢复活跃；不能确定是否疫苗反应。","source":"03_health/vaccines.md"}],"source_links":[{"label":"当前基线","path":"01_profile/baseline.md","group":"当前"},{"label":"基础档案","path":"01_profile/cat_profile.md","group":"当前"},{"label":"近期行动队列","path":"08_questions_decisions/action_queue.md","group":"当前"},{"label":"七月日志","path":"02_daily/logs/2026-07.md","group":"记录"},{"label":"体重与成长","path":"03_health/weight_growth.md","group":"记录"},{"label":"症状观察","path":"03_health/symptoms_observations.md","group":"记录"},{"label":"摄入观察","path":"04_nutrition/intake_observations.md","group":"记录"},{"label":"行为观察","path":"05_behavior_training/behavior_observations.md","group":"记录"},{"label":"居家环境","path":"06_environment_supplies/home_setup.md","group":"记录"},{"label":"完整索引","path":"INDEX.md","group":"导航"}]}</script>
+  <script>
+    (() => {
+      const data = JSON.parse(document.getElementById('xiaomi-data').textContent);
+      const escapeHtml = (value) => String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+      const evidence = Object.fromEntries(data.evidence_types.map(item => [item.id, item]));
+      const evidenceBadge = (id) => `<span class="badge badge-${id}">${escapeHtml(evidence[id].label)}</span>`;
+
+      const profile = data.profile;
+      document.getElementById('profile-strip').innerHTML = [
+        ['当时年龄', profile.age_label_as_of],
+        ['最近体重', `${(profile.latest_weight_g / 1000).toFixed(2)} kg`],
+        ['到家日期', profile.arrival_date],
+        ['花色记录', profile.coat]
+      ].map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('');
+
+      document.getElementById('metrics').innerHTML = data.headline_metrics.map(metric => `
+        <article class="metric">
+          <div class="metric-label">${escapeHtml(metric.label)}</div>
+          <div class="metric-value">${escapeHtml(metric.display)}</div>
+          <div class="metric-meta">${escapeHtml(metric.window)}</div>
+          <div class="metric-meta">${evidenceBadge(metric.evidence_type)} · ${escapeHtml(metric.limitation)}</div>
+          <a href="${escapeHtml(metric.source)}">查看来源</a>
+        </article>
+      `).join('');
+
+      const weights = data.growth.weight_history;
+      const tableBody = document.getElementById('weight-table');
+      tableBody.innerHTML = weights.map(item => `
+        <tr>
+          <td>${escapeHtml(item.observed_at || item.date)}</td>
+          <td>${item.age_days} 天</td>
+          <td>${item.weight_g} g</td>
+          <td>${evidenceBadge(item.value_type)}</td>
+          <td>${escapeHtml(item.note)}</td>
+        </tr>
+      `).join('');
+
+      const growth = data.growth.summary;
+      document.getElementById('growth-summary').innerHTML = [
+        { value: `+${growth.gain_g} g`, title: '到家以来', text: `标准日期差 ${growth.elapsed_days_by_date} 天，体重增加 ${growth.gain_percent}%。` },
+        { value: `${growth.daily_gain_range_g[0]}-${growth.daily_gain_range_g[1]} g/日`, title: '总体平均增速', text: '范围来自起点称重时刻未知；按日期差为 18.0 g/日。' },
+        { value: `${growth.three_week_weekly_gain_g} g/周`, title: '近三周平均', text: '三周分别增加 100、150、100 g，现有节点没有停滞或下降。' }
+      ].map(item => `
+        <div class="analysis-item">
+          <div class="value">${escapeHtml(item.value)}</div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.text)}</p>
+        </div>
+      `).join('');
+
+      const svg = document.getElementById('weight-chart');
+      const detail = document.getElementById('weight-detail');
+      const NS = 'http://www.w3.org/2000/svg';
+      const createSvg = (name, attrs = {}, text = '') => {
+        const el = document.createElementNS(NS, name);
+        Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+        if (text) el.textContent = text;
+        return el;
+      };
+
+      function renderWeightChart(mode = 'all') {
+        const points = mode === 'recorded' ? weights.filter(item => item.value_type === 'recorded') : weights;
+        const width = 760;
+        const height = 360;
+        const margin = { top: 30, right: 30, bottom: 52, left: 58 };
+        const x0 = new Date(points[0].date + 'T00:00:00').getTime();
+        const x1 = new Date(points[points.length - 1].date + 'T00:00:00').getTime();
+        const values = points.map(item => item.weight_g);
+        const yMin = Math.floor((Math.min(...values) - 80) / 100) * 100;
+        const yMax = Math.ceil((Math.max(...values) + 80) / 100) * 100;
+        const x = (dateValue) => margin.left + (new Date(dateValue + 'T00:00:00').getTime() - x0) / (x1 - x0) * (width - margin.left - margin.right);
+        const y = (value) => margin.top + (yMax - value) / (yMax - yMin) * (height - margin.top - margin.bottom);
+        svg.replaceChildren(
+          createSvg('title', { id: 'weight-chart-title' }, '小咪体重变化折线图'),
+          createSvg('desc', { id: 'weight-chart-desc' }, mode === 'recorded' ? '仅显示有明确记录日期的体重点。' : '显示全部体重点，估计日期使用空心点。')
+        );
+
+        for (let value = yMin; value <= yMax; value += 200) {
+          const yPos = y(value);
+          svg.append(createSvg('line', { x1: margin.left, x2: width - margin.right, y1: yPos, y2: yPos, class: 'chart-gridline' }));
+          svg.append(createSvg('text', { x: margin.left - 10, y: yPos + 4, 'text-anchor': 'end', class: 'chart-tick' }, `${value}g`));
+        }
+
+        const tickIndexes = [...new Set([0, Math.floor((points.length - 1) / 2), points.length - 1])];
+        tickIndexes.forEach(index => {
+          const item = points[index];
+          const xPos = x(item.date);
+          svg.append(createSvg('line', { x1: xPos, x2: xPos, y1: margin.top, y2: height - margin.bottom, class: 'chart-gridline' }));
+          svg.append(createSvg('text', { x: xPos, y: height - 20, 'text-anchor': 'middle', class: 'chart-tick' }, item.date.slice(5)));
+        });
+
+        const linePoints = points.map(item => `${x(item.date)},${y(item.weight_g)}`).join(' ');
+        const areaPoints = `${margin.left},${height - margin.bottom} ${linePoints} ${x(points.at(-1).date)},${height - margin.bottom}`;
+        svg.append(createSvg('polygon', { points: areaPoints, class: 'chart-area' }));
+        svg.append(createSvg('polyline', { points: linePoints, class: 'chart-line' }));
+
+        points.forEach((item, index) => {
+          const cx = x(item.date);
+          const cy = y(item.weight_g);
+          const point = createSvg('circle', {
+            cx,
+            cy,
+            r: item.value_type === 'estimated' ? 6 : 5,
+            class: `chart-point ${item.value_type === 'estimated' ? 'estimated' : ''}`,
+            'aria-hidden': 'true'
+          });
+          const showDetail = () => {
+            detail.innerHTML = `<strong>${escapeHtml(item.observed_at || item.date)} · ${item.weight_g} g</strong> · ${escapeHtml(evidence[item.value_type].label)} · ${escapeHtml(item.note)}`;
+          };
+          point.addEventListener('mouseenter', showDetail);
+          point.addEventListener('click', showDetail);
+          svg.append(point);
+          if (index === 0 || index === points.length - 1) {
+            svg.append(createSvg('text', {
+              x: cx,
+              y: cy - 13,
+              'text-anchor': index === 0 ? 'start' : 'end',
+              class: 'chart-value-label'
+            }, `${item.weight_g} g`));
+          }
+        });
+
+        const latest = points.at(-1);
+        detail.innerHTML = `<strong>${escapeHtml(latest.observed_at || latest.date)} · ${latest.weight_g} g</strong> · ${escapeHtml(evidence[latest.value_type].label)} · ${escapeHtml(latest.note)}`;
+      }
+
+      document.querySelectorAll('[data-weight-mode]').forEach(button => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll('[data-weight-mode]').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+          renderWeightChart(button.dataset.weightMode);
+        });
+      });
+      renderWeightChart();
+
+      const rhythm = data.nutrition_and_rhythm;
+      const evening = rhythm.direct_evening_window;
+      document.getElementById('rhythm-callout').innerHTML = `
+        <strong>${evening.hours} 小时吃了 ${evening.consumed_g} g</strong>
+        <span>占核心全天 ${evening.share_percent}%，平均速度约为其余时间的 ${evening.rate_ratio} 倍。</span>
+      `;
+      document.getElementById('rhythm-bar').innerHTML = rhythm.clock_segments.map(item => `
+        <span class="stacked-segment" style="width:${item.share_percent}%" aria-label="${escapeHtml(item.label)} ${item.share_percent}%"></span>
+      `).join('');
+      document.getElementById('rhythm-legend').innerHTML = rhythm.clock_segments.map(item => `
+        <div class="legend-item">
+          <span class="swatch" aria-hidden="true"></span>
+          <span>${escapeHtml(item.label)}</span>
+          <span class="legend-value">${item.grams} g · ${item.share_percent}%</span>
+        </div>
+      `).join('');
+      document.getElementById('rhythm-limitation').textContent = rhythm.clock_segments_limitation;
+
+      const bowls = rhythm.water_bowls;
+      const bowlData = [
+        { label: '白色水碗', value: bowls.white_bowl_loss_ml, share: bowls.white_share_percent },
+        { label: '黄色水碗', value: bowls.yellow_bowl_loss_ml, share: bowls.yellow_share_percent }
+      ];
+      document.getElementById('bowl-comparison').innerHTML = bowlData.map(item => `
+        <div class="bowl-row">
+          <span>${item.label}</span>
+          <span class="bowl-track"><span class="bowl-fill" style="width:${item.share}%"></span></span>
+          <strong>${item.value} ml</strong>
+        </div>
+      `).join('');
+      document.getElementById('bowl-limitation').textContent = `两碗合计减少 ${bowls.gross_loss_ml} ml。${bowls.limitation}`;
+
+      document.getElementById('dimension-grid').innerHTML = data.dimensions.map(item => `
+        <article class="dimension-card">
+          <h3>${escapeHtml(item.label)}</h3>
+          <dl>
+            <div><dt>看到了什么</dt><dd>${escapeHtml(item.observed)}</dd></div>
+            <div><dt>这意味着什么</dt><dd>${escapeHtml(item.meaning)}</dd></div>
+            <div><dt>还不能说明什么</dt><dd>${escapeHtml(item.limitation)}</dd></div>
+            <div class="next"><dt>下一次怎么记</dt><dd>${escapeHtml(item.next)}</dd></div>
+          </dl>
+        </article>
+      `).join('');
+
+      document.getElementById('clues').innerHTML = data.cross_dimension_clues.map(item => `
+        <article class="clue">
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.evidence)}</p>
+          <p><strong>${escapeHtml(item.interpretation)}</strong></p>
+          <p class="limit">边界：${escapeHtml(item.limitation)}</p>
+        </article>
+      `).join('');
+
+      const followups = data.followups;
+      const dimensions = ['全部', ...new Set(followups.map(item => item.dimension))];
+      const filterContainer = document.getElementById('followup-filters');
+      filterContainer.innerHTML = dimensions.map((label, index) => `
+        <button type="button" data-filter="${escapeHtml(label)}" aria-pressed="${index === 0}">${escapeHtml(label)}</button>
+      `).join('');
+      const followupList = document.getElementById('followup-list');
+      followupList.innerHTML = followups.map(item => `
+        <article class="followup" data-dimension="${escapeHtml(item.dimension)}">
+          <div class="followup-state">
+            <span class="badge badge-${item.attention_level === '中' ? 'reference' : item.attention_level === '计划' ? 'estimated' : 'observed'}">${escapeHtml(item.status)}</span>
+            <span class="attention">${escapeHtml(item.dimension)} · ${escapeHtml(item.attention_level)}</span>
+          </div>
+          <div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.observed)}</p>
+            <a href="${escapeHtml(item.source)}">查看来源</a>
+          </div>
+          <div>
+            <p class="action"><strong>下一步：</strong>${escapeHtml(item.next)}</p>
+            <p class="escalate">${escapeHtml(item.escalate)}</p>
+          </div>
+        </article>
+      `).join('');
+      filterContainer.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          filterContainer.querySelectorAll('button').forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+          followupList.querySelectorAll('.followup').forEach(item => {
+            item.hidden = button.dataset.filter !== '全部' && item.dataset.dimension !== button.dataset.filter;
+          });
+        });
+      });
+
+      document.getElementById('timeline').innerHTML = data.recent_timeline.map(item => `
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="${escapeHtml(item.date)}">${escapeHtml(item.date.slice(5))}</time>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <div class="timeline-content">
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.detail)}</p>
+            <a href="${escapeHtml(item.source)}">${escapeHtml(item.category)}记录</a>
+          </div>
+        </article>
+      `).join('');
+
+      const groupedSources = Object.groupBy
+        ? Object.groupBy(data.source_links, item => item.group)
+        : data.source_links.reduce((groups, item) => {
+            (groups[item.group] ||= []).push(item);
+            return groups;
+          }, {});
+      document.getElementById('source-groups').innerHTML = Object.entries(groupedSources).map(([group, items]) => `
+        <div class="source-group">
+          <h3>${escapeHtml(group)}</h3>
+          <ul>${items.map(item => `<li><a href="${escapeHtml(item.path)}">${escapeHtml(item.label)}</a></li>`).join('')}</ul>
+        </div>
+      `).join('');
+    })();
+  </script>
+</body>
+</html>

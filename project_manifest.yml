@@ -1,43 +1,100 @@
+schema_version: 2
+
 project:
   name: cat_xiaomi
   purpose: "小咪的猫咪生活档案、知识库、问题追踪和长期养育记录"
   primary_language: zh-CN
+  visibility: public
+  last_reviewed: 2026-07-13
 
 agent_entrypoints:
   - AGENTS.md
   - INDEX.md
   - 01_profile/cat_profile.md
   - 01_profile/baseline.md
+  - 08_questions_decisions/action_queue.md
+
+data_layers:
+  source:
+    description: "带日期的原始观察、事件和测量；发生冲突时优先读取较新的来源"
+    paths:
+      - 02_daily/logs
+      - 03_health
+      - 04_nutrition
+      - 05_behavior_training
+      - 06_environment_supplies
+  current_summary:
+    description: "当前可用摘要，必须带更新时间，不覆盖更晚的原始记录"
+    paths:
+      - 01_profile/cat_profile.md
+      - 01_profile/baseline.md
+      - 08_questions_decisions/action_queue.md
+  derived:
+    description: "由原始记录生成或归纳的分析与展示，不作为新事实源"
+    paths:
+      - 11_insights
+      - dashboard.html
+  history:
+    description: "历史导入、旧回答、实验和日期快照，仅用于追溯"
+    paths:
+      - 08_questions_decisions/confirmation_questions_2026-07-06.md
+      - 08_questions_decisions/ai_answers.md
+      - 08_questions_decisions/experiments.md
+      - 04_nutrition/reports
 
 areas:
+  inbox:
+    path: 00_inbox
+    role: source
+    description: "尚未分类的临时记录；应定期清空"
   profile:
     path: 01_profile
+    role: current_summary
     description: "身份、成长时间线、偏好、当前基线"
   daily:
     path: 02_daily
+    role: source
     description: "日常作息、日志和生活变化"
   health:
     path: 03_health
+    role: source
     description: "医疗、体重、疫苗、驱虫、症状、应急"
   nutrition:
     path: 04_nutrition
+    role: source
     description: "主食、零食、饮水、喂食记录"
   behavior_training:
     path: 05_behavior_training
+    role: source
     description: "行为观察、训练计划、压力源、社会化"
   environment_supplies:
     path: 06_environment_supplies
+    role: source
     description: "居家环境、用品、清洁、安全、玩具丰容"
   knowledge:
     path: 07_knowledge
+    role: reference
     description: "已学习和待验证的猫咪知识"
   questions_decisions:
     path: 08_questions_decisions
+    role: mixed
     description: "问题、AI 回答、实验、决策"
   media:
     path: 09_media
+    role: attachment
     description: "照片、视频、医院资料、票据"
   templates:
     path: 10_templates
+    role: template
     description: "可复制使用的记录模板"
+  insights:
+    path: 11_insights
+    role: derived
+    description: "跨维度数据快照、分析报告和展示数据"
 
+generated_artifacts:
+  dashboard:
+    path: dashboard.html
+    source: 11_insights/data/current_snapshot.json
+    build: "python3 scripts/build_dashboard.py"
+    check: "python3 scripts/check_repository.py"
