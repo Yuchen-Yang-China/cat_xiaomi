@@ -12,3 +12,4 @@
 | 约 2026-06-21 | 约 3 个月 | 洗澡 + 接触猫薄荷玩具后出现亢奋、高频呼吸约 80 次/分和软便 | `03_health/symptoms_observations.md`、`05_behavior_training/stress_triggers.md` |
 | 2026-06-26 | 约 3 个月 | 体重 1050 g；端午大餐后出现挑食埋碗，开始纠偏 | `03_health/weight_growth.md`、`04_nutrition/diet_plan.md` |
 | 2026-07-03 | 约 3 个多月 | 体重 1.2 kg；接种硕腾妙三多第一针 | `03_health/vaccines.md` |
+| 2026-07-10 | 约 3 个半月 | 22:21 称重 1300 g | `03_health/weight_growth.md` |
