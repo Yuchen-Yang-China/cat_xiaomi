@@ -4,8 +4,8 @@
 
 ## 文件
 
-- [`data/current_snapshot.json`](data/current_snapshot.json)：截至 2026-07-13 的机器可读派生快照。
-- [`reports/2026-07-13_multidimensional_snapshot.md`](reports/2026-07-13_multidimensional_snapshot.md)：给主人阅读的综合分析。
+- [`data/current_snapshot.json`](data/current_snapshot.json)：截至 2026-07-21 的机器可读派生快照。
+- [`reports/2026-07-13_multidimensional_snapshot.md`](reports/2026-07-13_multidimensional_snapshot.md)：截至 2026-07-13 的综合分析日期快照。
 - [`../dashboard.html`](../dashboard.html)：由快照生成的离线总览。
 - [`../scripts/build_dashboard.py`](../scripts/build_dashboard.py)：看板构建与一致性检查脚本。
 
@@ -13,7 +13,7 @@
 
 | 类型 | 含义 | 示例 |
 | --- | --- | --- |
-| 记录值 | 有日期和数值的原始记录，但测量方式可能仍有缺口 | 2026-07-10 体重 1300 g |
+| 记录值 | 有日期和数值的原始记录，但测量方式可能仍有缺口 | 2026-07-19 体重 1420 g |
 | 观察值 | 主人直接看到或回顾的现象，没有精密测量 | 每天约 4-5 个尿团 |
 | 估算值 | 由插值、折算或假设得到 | 观察期体重约 1.25 kg |
 | 推断值 | 多条记录放在一起形成的解释 | 夜间活动与进食高峰方向一致 |

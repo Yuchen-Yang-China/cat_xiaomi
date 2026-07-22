@@ -777,8 +777,8 @@ def render(data: dict) -> str:
       const growth = data.growth.summary;
       document.getElementById('growth-summary').innerHTML = [
         {{ value: `+${{growth.gain_g}} g`, title: '到家以来', text: `标准日期差 ${{growth.elapsed_days_by_date}} 天，体重增加 ${{growth.gain_percent}}%。` }},
-        {{ value: `${{growth.daily_gain_range_g[0]}}-${{growth.daily_gain_range_g[1]}} g/日`, title: '总体平均增速', text: '范围来自起点称重时刻未知；按日期差为 18.0 g/日。' }},
-        {{ value: `${{growth.three_week_weekly_gain_g}} g/周`, title: '近三周平均', text: '三周分别增加 100、150、100 g，现有节点没有停滞或下降。' }}
+        {{ value: `${{growth.daily_gain_range_g[0]}}-${{growth.daily_gain_range_g[1]}} g/日`, title: '总体平均增速', text: `范围来自起点称重时刻未知；按日期差为 ${{growth.daily_gain_by_date_g}} g/日。` }},
+        {{ value: `${{growth.recent_window_weekly_gain_g}} g/周`, title: '近约三周平均', text: `${{growth.recent_window_start}} 至 ${{growth.recent_window_end}} 共 ${{growth.recent_window_days}} 天增加 ${{growth.recent_window_gain_g}} g；现有节点没有停滞或下降。` }}
       ].map(item => `
         <div class="analysis-item">
           <div class="value">${{escapeHtml(item.value)}}</div>

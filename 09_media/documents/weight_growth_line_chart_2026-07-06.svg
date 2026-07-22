@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title desc">
   <title id="title">小咪体重变化、参考范围与短期投影</title>
-  <desc id="desc">2026-05-30 到 2026-07-10，小咪体重从 560 克增长到 1300 克；图中包含粗略参考体重带、参考中心线，以及延伸到 2026-08-01 的短期投影。</desc>
+  <desc id="desc">2026-05-30 到 2026-07-19，小咪体重从 560 克增长到 1420 克；图中包含粗略参考体重带、参考中心线，以及延伸到 2026-08-01 的短期投影。</desc>
   <defs>
     <style>
       .bg { fill: #ffffff; }
@@ -27,7 +27,7 @@
   </defs>
   <rect class="bg" width="1000" height="650" />
   <text class="title" x="90" y="36">小咪体重变化、参考范围与短期投影</text>
-  <text class="subtitle" x="90" y="60">记录范围：2026-05-30 到 2026-07-10；投影延伸至 2026-08-01；单位：g</text>
+  <text class="subtitle" x="90" y="60">记录范围：2026-05-30 到 2026-07-19；投影延伸至 2026-08-01；单位：g</text>
 
   <!-- Plot area: x 90-880, y 80-450. Reference band is a rough visual aid, not a diagnosis. -->
   <line class="grid" x1="90" y1="440.0" x2="880" y2="440.0" />
@@ -55,10 +55,10 @@
   <text class="label" x="22" y="270" transform="rotate(-90 22 270)">体重（g）</text>
   <text class="label" x="470" y="550">日期</text>
 
-  <polyline class="line" points="90.0,428.0 127.6,422.0 165.2,418.0 177.8,407.0 190.3,400.0 265.6,390.0 303.2,368.0 340.8,350.0 428.6,330.0 516.3,300.0 604.1,280.0" />
-  <polyline class="projection" points="604.1,280.0 880.0,205.6" />
-  <polyline class="recent-projection" points="604.1,280.0 880.0,226.9" />
-  <line class="gap-line" x1="604.1" y1="280.0" x2="604.1" y2="221.1" />
+  <polyline class="line" points="90.0,428.0 127.6,422.0 165.2,418.0 177.8,407.0 190.3,400.0 265.6,390.0 303.2,368.0 340.8,350.0 428.6,330.0 516.3,300.0 604.1,280.0 717.0,256.0" />
+  <polyline class="projection" points="717.0,256.0 880.0,211.3" />
+  <polyline class="recent-projection" points="717.0,256.0 880.0,219.8" />
+  <line class="gap-line" x1="717.0" y1="256.0" x2="717.0" y2="194.4" />
 
   <circle class="actual" cx="90.0" cy="428.0" r="5.5" />
   <circle class="actual" cx="127.6" cy="422.0" r="5.5" />
@@ -69,10 +69,11 @@
   <circle class="actual" cx="428.6" cy="330.0" r="5.5" />
   <circle class="actual" cx="516.3" cy="300.0" r="5.5" />
   <circle class="actual" cx="604.1" cy="280.0" r="5.5" />
+  <circle class="actual" cx="717.0" cy="256.0" r="5.5" />
   <circle class="estimated" cx="265.6" cy="390.0" r="5.5" />
   <circle class="estimated" cx="303.2" cy="368.0" r="5.5" />
-  <circle class="projection-point" cx="880.0" cy="205.6" r="5.5" />
-  <circle class="recent-projection-point" cx="880.0" cy="226.9" r="5.5" />
+  <circle class="projection-point" cx="880.0" cy="211.3" r="5.5" />
+  <circle class="recent-projection-point" cx="880.0" cy="219.8" r="5.5" />
 
   <text class="value" x="66.0" y="438.0">560</text>
   <text class="value" x="115.6" y="434.0">590</text>
@@ -85,14 +86,15 @@
   <text class="value" x="408.6" y="318.0">1050</text>
   <text class="value" x="498.3" y="288.0">1200</text>
   <text class="value" x="592.1" y="268.0">1300</text>
-  <text class="value" x="808" y="218">约1672</text>
-  <text class="value" x="808" y="244.9">约1566</text>
+  <text class="value" x="696.0" y="244.0">1420</text>
+  <text class="value" x="808" y="207">约1644</text>
+  <text class="value" x="808" y="238">约1601</text>
 
   <rect x="615" y="104" width="250" height="92" rx="6" fill="#ffffff" opacity="0.9" stroke="#e5e7eb" />
-  <text class="value" x="630" y="126">07-10 22:21：1300 g</text>
-  <text class="note" x="630" y="146">仍在持续增长</text>
+  <text class="value" x="630" y="126">07-19 12:55：1420 g</text>
+  <text class="note" x="630" y="146">较 07-10 增加 120 g</text>
   <text class="note" x="630" y="166">低于参考中心约 0.31 kg</text>
-  <text class="note" x="630" y="186">短期投影约 1.56-1.67 kg</text>
+  <text class="note" x="630" y="186">短期投影约 1.60-1.64 kg</text>
 
   <g transform="translate(90 472)">
     <text class="tick" x="0.0" y="20" transform="rotate(-35 0.0 20)">05-30</text>

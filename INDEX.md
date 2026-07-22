@@ -9,7 +9,7 @@
 - [基础档案](01_profile/cat_profile.md)：身份、当前主食、疫苗驱虫和健康摘要。
 - [近期行动队列](08_questions_decisions/action_queue.md)：下一次需要观察、确认或安排的事情。
 - [最新日常日志](02_daily/logs/2026-07.md)：最近发生了什么。
-- [当前多维分析](11_insights/reports/2026-07-13_multidimensional_snapshot.md)：这批数据能说明什么、还不能说明什么。
+- [2026-07-13 多维分析快照](11_insights/reports/2026-07-13_multidimensional_snapshot.md)：截至该日期的数据能说明什么、还不能说明什么；当前数值以看板和原始记录为准。
 
 ## 按问题查找
 

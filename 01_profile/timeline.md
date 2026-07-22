@@ -13,3 +13,6 @@
 | 2026-06-26 | 约 3 个月 | 体重 1050 g；端午大餐后出现挑食埋碗，开始纠偏 | `03_health/weight_growth.md`、`04_nutrition/diet_plan.md` |
 | 2026-07-03 | 约 3 个多月 | 体重 1.2 kg；接种硕腾妙三多第一针 | `03_health/vaccines.md` |
 | 2026-07-10 | 约 3 个半月 | 22:21 称重 1300 g | `03_health/weight_growth.md` |
+| 2026-07-18 | 3 个月 23 天 | 观察右耳比左耳更严重，按疑似耳螨使用滴耳液和复方制霉菌素软膏；诊断及用药详情待确认 | `03_health/symptoms_observations.md`、`03_health/medications.md` |
+| 2026-07-19 | 3 个月 24 天 | 12:55 称重 1420 g；12:57 摘下耳部处理后佩戴一整晚的伊丽莎白圈 | `03_health/weight_growth.md`、`02_daily/logs/2026-07.md` |
+| 2026-07-21 | 3 个月 26 天 | 耳部处理后仍有褐黑油性分泌物、耳周黑点和皮屑样粘连物；诊断及产品详情待确认 | `03_health/symptoms_observations.md`、`03_health/medications.md` |

@@ -17,8 +17,8 @@
     "age_label_as_of": "3 个月 26 天",
     "arrival_date": "2026-05-30",
     "coat": "紫金渐层",
-    "latest_weight_g": 1300,
-    "latest_weight_at": "2026-07-10 22:21",
+    "latest_weight_g": 1420,
+    "latest_weight_at": "2026-07-19 12:55",
     "source": "01_profile/cat_profile.md"
   },
   "evidence_types": [
@@ -53,25 +53,25 @@
       "id": "latest_weight",
       "dimension": "生长",
       "label": "最近体重",
-      "value": 1300,
+      "value": 1420,
       "unit": "g",
-      "display": "1.30 kg",
-      "window": "2026-07-10 22:21",
+      "display": "1.42 kg",
+      "window": "2026-07-19 12:55",
       "evidence_type": "recorded",
       "source": "03_health/weight_growth.md",
       "limitation": "称重工具未记录"
     },
     {
-      "id": "growth_three_weeks",
+      "id": "growth_recent_window",
       "dimension": "生长",
-      "label": "近三周平均增重",
-      "value": 116.7,
+      "label": "近约三周平均增重",
+      "value": 112.6,
       "unit": "g/week",
-      "display": "116.7 g/周",
-      "window": "2026-06-19 至 2026-07-10",
+      "display": "112.6 g/周",
+      "window": "2026-06-26 至 2026-07-19",
       "evidence_type": "estimated",
       "source": "03_health/weight_growth.md",
-      "limitation": "按三个相隔 7 天的记录区间计算"
+      "limitation": "按相隔 23 天的两个记录值折算；称重时刻和工具不完全一致"
     },
     {
       "id": "dry_food_24h",
@@ -139,21 +139,24 @@
   "growth": {
     "summary": {
       "start_date": "2026-05-30",
-      "end_date": "2026-07-10",
-      "elapsed_days_by_date": 41,
-      "calendar_dates_covered": 42,
+      "end_date": "2026-07-19",
+      "elapsed_days_by_date": 50,
+      "calendar_dates_covered": 51,
       "start_weight_g": 560,
-      "end_weight_g": 1300,
-      "gain_g": 740,
-      "gain_percent": 132.1,
-      "daily_gain_by_date_g": 18.05,
+      "end_weight_g": 1420,
+      "gain_g": 860,
+      "gain_percent": 153.6,
+      "daily_gain_by_date_g": 17.2,
       "daily_gain_range_g": [
-        17.65,
-        18.08
+        17.02,
+        17.36
       ],
-      "three_week_gain_g": 350,
-      "three_week_daily_gain_g": 16.67,
-      "three_week_weekly_gain_g": 116.7,
+      "recent_window_start": "2026-06-26",
+      "recent_window_end": "2026-07-19",
+      "recent_window_days": 23,
+      "recent_window_gain_g": 370,
+      "recent_window_daily_gain_g": 16.09,
+      "recent_window_weekly_gain_g": 112.6,
       "direction": "持续上升，现有节点没有停滞或下降",
       "limitation": "起点称重时刻和称重工具缺失；短间隔变化混有进食、排泄和测量误差"
     },
@@ -246,6 +249,15 @@
         "value_type": "recorded",
         "date_precision": "minute",
         "note": "主人新增记录"
+      },
+      {
+        "date": "2026-07-19",
+        "observed_at": "2026-07-19 12:55",
+        "age_days": 116,
+        "weight_g": 1420,
+        "value_type": "recorded",
+        "date_precision": "minute",
+        "note": "主人新增记录；测量方式、当时进食和排泄状态待确认"
       }
     ],
     "weekly_intervals": [
@@ -269,6 +281,15 @@
         "days": 7,
         "gain_g": 100,
         "daily_gain_g": 14.29
+      },
+      {
+        "start": "2026-07-10",
+        "end": "2026-07-19",
+        "start_at": "2026-07-10 22:21",
+        "end_at": "2026-07-19 12:55",
+        "days": 8.61,
+        "gain_g": 120,
+        "daily_gain_g": 13.94
       }
     ],
     "source": "03_health/weight_growth.md"
@@ -383,10 +404,10 @@
     {
       "id": "health",
       "label": "健康与生长",
-      "observed": "体重持续增加；已接种首针疫苗。2026-07-21 记录耳内黑色渣状分泌物及用药后褐黑油性分泌物。",
+      "observed": "体重持续增加，2026-07-19 体重为 1420 g；已接种首针疫苗。2026-07-18 按疑似耳螨使用滴耳液和复方制霉菌素外用制剂，2026-07-21 记录仍有褐黑油性分泌物。",
       "meaning": "生长方向和一次摄入记录彼此协调；耳部问题目前更适合作为独立健康事件尽快确认。",
-      "limitation": "疑似皮肤问题未复查，耳部表现未确诊，也没有完整耳镜/耳垢检查结果。",
-      "next": "带耳部照片和已用药包装尽快做耳镜、耳垢显微或细胞学检查。"
+      "limitation": "疑似皮肤问题未复查；耳部表现未确诊，外用制剂包装名称、用药来源和使用部位未确认，也没有完整耳镜/耳垢检查结果。",
+      "next": "记录两耳表现，带耳部照片和已用药包装尽快做耳镜、耳垢显微或细胞学检查。"
     },
     {
       "id": "nutrition",
@@ -471,11 +492,11 @@
       "id": "eyes_nose_ears",
       "dimension": "健康",
       "attention_level": "中",
-      "title": "耳部褐黑油性分泌物待确认",
+      "title": "耳部问题、用药及眼鼻表现待确认",
       "status": "尽快就诊确认",
-      "observed": "2026-07-21 记录耳内黑色渣状分泌物；使用滴耳液和复方制霉菌素乳膏后仍有褐黑油性物质、耳周黑点和皮屑样粘连物。",
-      "next": "停止深入掏耳道，带照片和已用药包装做耳镜、耳垢显微或细胞学检查。",
-      "escalate": "频繁甩头/抓耳、异味、疼痛、头歪、走路不稳、食欲或精神下降时提前联系兽医。",
+      "observed": "每天少量眼屎和黑色鼻屎、非常偶尔喷嚏；2026-07-18 观察右耳更严重并按疑似耳螨用药，2026-07-21 记录仍有褐黑油性物质、耳周黑点和皮屑样粘连物。",
+      "next": "停止深入掏耳道，记录两耳表现，带照片和已用药包装做耳镜、耳垢显微或细胞学检查。",
+      "escalate": "频繁甩头/抓耳、异味、明显疼痛、头歪/失衡、耳部出血或脓性分泌物、食欲或精神下降时提前联系兽医。",
       "source": "03_health/symptoms_observations.md"
     },
     {
@@ -528,7 +549,21 @@
       "date": "2026-07-21",
       "category": "健康",
       "title": "耳部褐黑油性分泌物待确认",
-      "detail": "使用滴耳液和复方制霉菌素乳膏后仍有褐黑油性物质和皮屑样粘连物；建议耳镜和耳垢检查。",
+      "detail": "使用滴耳液和复方制霉菌素外用制剂后仍有褐黑油性物质和皮屑样粘连物；建议耳镜和耳垢检查。",
+      "source": "03_health/symptoms_observations.md"
+    },
+    {
+      "date": "2026-07-19",
+      "category": "生长",
+      "title": "体重 1420 g",
+      "detail": "12:55 称重；较 2026-07-10 22:21 增加 120 g，仍在持续增长。",
+      "source": "03_health/weight_growth.md"
+    },
+    {
+      "date": "2026-07-18",
+      "category": "医疗",
+      "title": "按疑似耳螨处理",
+      "detail": "观察上右耳更严重；使用滴耳液和复方制霉菌素软膏后戴圈过夜，诊断、用药详情和反应待确认。",
       "source": "03_health/symptoms_observations.md"
     },
     {
@@ -551,13 +586,6 @@
       "title": "疑似长头发拖便",
       "detail": "把线状物清理与收纳列为当前环境优先项。",
       "source": "03_health/symptoms_observations.md"
-    },
-    {
-      "date": "2026-07-10",
-      "category": "生长",
-      "title": "体重 1300 g",
-      "detail": "较 2026-07-03 增加约 100 g。",
-      "source": "03_health/weight_growth.md"
     },
     {
       "date": "2026-07-07",
@@ -603,6 +631,11 @@
     {
       "label": "症状观察",
       "path": "03_health/symptoms_observations.md",
+      "group": "记录"
+    },
+    {
+      "label": "用药记录",
+      "path": "03_health/medications.md",
       "group": "记录"
     },
     {
