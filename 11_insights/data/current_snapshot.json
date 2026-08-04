@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "meta": {
-    "as_of": "2026-07-21",
+    "as_of": "2026-08-02",
     "title": "小咪当前多维照护快照",
-    "record_window": "2026-05-30 至 2026-07-21",
+    "record_window": "2026-05-30 至 2026-08-02",
     "purpose": "将现有记录整理成可追溯的趋势、线索和行动入口",
     "medical_boundary": "派生分析不等于诊断；健康与用药相关决定以兽医面诊和当次医嘱为准",
     "source_of_truth": "带日期的月度日志和专题记录",
@@ -13,12 +13,12 @@
     "name": "小咪",
     "sex": "母猫",
     "birth_date": "2026-03-25",
-    "age_days_as_of": 118,
-    "age_label_as_of": "3 个月 26 天",
+    "age_days_as_of": 130,
+    "age_label_as_of": "4 个月 8 天",
     "arrival_date": "2026-05-30",
     "coat": "紫金渐层",
-    "latest_weight_g": 1420,
-    "latest_weight_at": "2026-07-19 12:55",
+    "latest_weight_g": 1530,
+    "latest_weight_at": "2026-07-31",
     "source": "01_profile/cat_profile.md"
   },
   "evidence_types": [
@@ -53,25 +53,25 @@
       "id": "latest_weight",
       "dimension": "生长",
       "label": "最近体重",
-      "value": 1420,
+      "value": 1530,
       "unit": "g",
-      "display": "1.42 kg",
-      "window": "2026-07-19 12:55",
+      "display": "1.53 kg",
+      "window": "2026-07-31",
       "evidence_type": "recorded",
       "source": "03_health/weight_growth.md",
-      "limitation": "称重工具未记录"
+      "limitation": "已确认在接种前称重；具体时间、工具/地点未记录"
     },
     {
       "id": "growth_recent_window",
       "dimension": "生长",
-      "label": "近约三周平均增重",
-      "value": 112.6,
+      "label": "近四周平均增重",
+      "value": 82.5,
       "unit": "g/week",
-      "display": "112.6 g/周",
-      "window": "2026-06-26 至 2026-07-19",
+      "display": "82.5 g/周",
+      "window": "2026-07-03 至 2026-07-31",
       "evidence_type": "estimated",
       "source": "03_health/weight_growth.md",
-      "limitation": "按相隔 23 天的两个记录值折算；称重时刻和工具不完全一致"
+      "limitation": "按相隔 28 个日期日的两个记录值折算；称重时刻和工具不完全一致"
     },
     {
       "id": "dry_food_24h",
@@ -139,24 +139,24 @@
   "growth": {
     "summary": {
       "start_date": "2026-05-30",
-      "end_date": "2026-07-19",
-      "elapsed_days_by_date": 50,
-      "calendar_dates_covered": 51,
+      "end_date": "2026-07-31",
+      "elapsed_days_by_date": 62,
+      "calendar_dates_covered": 63,
       "start_weight_g": 560,
-      "end_weight_g": 1420,
-      "gain_g": 860,
-      "gain_percent": 153.6,
-      "daily_gain_by_date_g": 17.2,
+      "end_weight_g": 1530,
+      "gain_g": 970,
+      "gain_percent": 173.2,
+      "daily_gain_by_date_g": 15.65,
       "daily_gain_range_g": [
-        17.02,
-        17.36
+        15.4,
+        15.9
       ],
-      "recent_window_start": "2026-06-26",
-      "recent_window_end": "2026-07-19",
-      "recent_window_days": 23,
-      "recent_window_gain_g": 370,
-      "recent_window_daily_gain_g": 16.09,
-      "recent_window_weekly_gain_g": 112.6,
+      "recent_window_start": "2026-07-03",
+      "recent_window_end": "2026-07-31",
+      "recent_window_days": 28,
+      "recent_window_gain_g": 330,
+      "recent_window_daily_gain_g": 11.79,
+      "recent_window_weekly_gain_g": 82.5,
       "direction": "持续上升，现有节点没有停滞或下降",
       "limitation": "起点称重时刻和称重工具缺失；短间隔变化混有进食、排泄和测量误差"
     },
@@ -258,6 +258,23 @@
         "value_type": "recorded",
         "date_precision": "minute",
         "note": "主人新增记录；测量方式、当时进食和排泄状态待确认"
+      },
+      {
+        "date": "2026-07-26",
+        "observed_at": "2026-07-26 12:03",
+        "age_days": 123,
+        "weight_g": 1500,
+        "value_type": "recorded",
+        "date_precision": "minute",
+        "note": "主人新增记录；测量方式、当时进食和排泄状态待确认"
+      },
+      {
+        "date": "2026-07-31",
+        "age_days": 128,
+        "weight_g": 1530,
+        "value_type": "recorded",
+        "date_precision": "day",
+        "note": "主人确认在接种第二针前称重；测量时间、工具/地点及当时进食和排泄状态待确认"
       }
     ],
     "weekly_intervals": [
@@ -290,6 +307,24 @@
         "days": 8.61,
         "gain_g": 120,
         "daily_gain_g": 13.94
+      },
+      {
+        "start": "2026-07-19",
+        "end": "2026-07-26",
+        "start_at": "2026-07-19 12:55",
+        "end_at": "2026-07-26 12:03",
+        "days": 6.96,
+        "gain_g": 80,
+        "daily_gain_g": 11.49
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-07-31",
+        "start_at": "2026-07-26 12:03",
+        "days": 5,
+        "gain_g": 30,
+        "daily_gain_g": 6.0,
+        "note": "终点时刻待确认；按日期差折算，不作短期生长速度判断"
       }
     ],
     "source": "03_health/weight_growth.md"
@@ -404,26 +439,26 @@
     {
       "id": "health",
       "label": "健康与生长",
-      "observed": "体重持续增加，2026-07-19 体重为 1420 g；已接种首针疫苗。2026-07-18 按疑似耳螨使用滴耳液和复方制霉菌素外用制剂，2026-07-21 记录仍有褐黑油性分泌物。",
-      "meaning": "生长方向和一次摄入记录彼此协调；耳部问题目前更适合作为独立健康事件尽快确认。",
-      "limitation": "疑似皮肤问题未复查；耳部表现未确诊，外用制剂包装名称、用药来源和使用部位未确认，也没有完整耳镜/耳垢检查结果。",
-      "next": "记录两耳表现，带耳部照片和已用药包装尽快做耳镜、耳垢显微或细胞学检查。"
+      "observed": "体重持续增加，2026-07-31 接种第二针前体重为 1530 g；第二针回家后立即玩，截至 2026-08-02 未见异常反应。复方制霉菌素软膏连续使用约 13 天后，主人观察耳朵明显变干净；同次接种时医生建议顽固疑似猫癣处使用复方特比萘芬喷剂每日 2 次。",
+      "meaning": "耳部外观改善是有价值的治疗后观察，但不能单独确认耳螨、酵母、细菌或炎症已经清除；皮肤喷药方向来自医生，完整操作仍需核实。",
+      "limitation": "耳部未记录耳镜/耳垢检查确诊，软膏产品、位置、剂量、连续疗程起点和 21 天依据不完整；疑似猫癣也未记录真菌检查，喷剂产品、用量、疗程和‘擦干’相关步骤待确认。",
+      "next": "拍两种产品正反面并向医院核实疗程和完整用法；耳药疗程结束时考虑耳镜/耳垢细胞学复查，顽固皮损持续时确认真菌诊断。"
     },
     {
       "id": "nutrition",
       "label": "营养与排泄",
-      "observed": "一次 24 小时核心观察中，干粮约 51.4 g；日常约 4-5 个尿团、1-2 团成型便。",
+      "observed": "一次 24 小时核心观察中，干粮约 51.4 g；日常约 4-5 个尿团、1-2 团成型便。2026-08-02 当前皇家 1-4 月龄奶糕接近吃完，家中已有皇家 12 月龄以下幼猫粮。",
       "meaning": "这一天没有吃空碗，记录本身不支持吃粮不足；排泄有可用基线。",
       "limitation": "只有一天精确摄入；冻干未计，湿粮实际吃下量和包装能量未记录。",
-      "next": "下次湿粮日记录提供量、剩余量、加水量和当天干粮摄入。"
+      "next": "先按至少 7 天完成现有两袋皇家之间的换粮；稳定 10-14 天前不同时引入第二品牌或其他新食物。"
     },
     {
       "id": "behavior",
       "label": "行为与情绪",
-      "observed": "白天偏睡、夜间活跃；有玩耍咬手、经常舔人和物品、单次猫条呜声，也能在低唤醒时接受触碰。",
+      "observed": "白天偏睡、夜间活跃；有玩耍咬手、经常舔人和物品、单次猫条呜声，也能在低唤醒时接受触碰。2026-08-02 主人计划开始外部世界脱敏。",
       "meaning": "高唤醒时更适合玩耍和重定向，安静时更适合护理脱敏。",
       "limitation": "多数行为没有次数分母，暂时不能计算频率或训练改善率。",
-      "next": "优先只追踪 1-2 个活跃目标，并记成功次数和失败场景。"
+      "next": "先在室内练胸背、固定牵引绳、猫包和召回；公共环境接触等兽医确认免疫保护和驱虫方案。"
     },
     {
       "id": "environment",
@@ -483,8 +518,8 @@
       "attention_level": "中",
       "title": "疑似皮肤问题待复查",
       "status": "待复查",
-      "observed": "头顶、左脸、左手关节曾在涂药前紫外灯下发绿；2026-07-13 耳朵也出现疑似皮肤变化，未兽医确诊。",
-      "next": "同光线拍照并记录脱毛、红、痂、痒和是否扩大；就诊时一并检查。",
+      "observed": "头顶、左脸、左手关节曾在涂药前紫外灯下发绿；2026-07-13 耳朵也出现疑似皮肤变化。2026-07-31 医生建议顽固疑似猫癣处使用复方特比萘芬喷剂每日 2 次，但产品和完整用法待确认。",
+      "next": "确认医生所指病灶，拍产品正反面并向医院核实每次用量、疗程，以及‘擦干’是喷前、喷后还是其他步骤；不按模糊记忆补全。",
       "escalate": "持续、扩散或复发时预约兽医检查，不自行恢复旧药方案。",
       "source": "03_health/skin_ringworm.md"
     },
@@ -493,9 +528,9 @@
       "dimension": "健康",
       "attention_level": "中",
       "title": "耳部问题、用药及眼鼻表现待确认",
-      "status": "尽快就诊确认",
-      "observed": "每天少量眼屎和黑色鼻屎、非常偶尔喷嚏；2026-07-18 观察右耳更严重并按疑似耳螨用药，2026-07-21 记录仍有褐黑油性物质、耳周黑点和皮屑样粘连物。",
-      "next": "停止深入掏耳道，记录两耳表现，带照片和已用药包装做耳镜、耳垢显微或细胞学检查。",
+      "status": "外观改善；疗程和诊断待确认",
+      "observed": "每天少量眼屎和黑色鼻屎、非常偶尔喷嚏；2026-07-18 观察右耳更严重并开始相关处理，2026-08-02 回顾连续使用复方制霉菌素软膏约 13 天后耳朵明显变干净。",
+      "next": "停止深入掏耳道；拍软膏包装并确认位置、次数、21 天依据。疗程结束时考虑耳镜和耳垢显微/细胞学复查。",
       "escalate": "频繁甩头/抓耳、异味、明显疼痛、头歪/失衡、耳部出血或脓性分泌物、食欲或精神下降时提前联系兽医。",
       "source": "03_health/symptoms_observations.md"
     },
@@ -517,7 +552,7 @@
       "title": "确认下一次驱虫方案",
       "status": "待确认",
       "observed": "上次吡虫啉莫昔克丁约为 2026-06-19，历史产品规格缺失。",
-      "next": "约 2026-07-19 前后，按当日体重、产品全名和规格与兽医确认。",
+      "next": "按 2026-07-31 当日体重、产品全名和规格与接种医院/兽医确认；不要自行复制历史剂量。",
       "escalate": "不要复制历史剂量或叠加多个体外驱虫产品。",
       "source": "03_health/deworming_flea_tick.md"
     },
@@ -525,12 +560,45 @@
       "id": "vaccine_second",
       "dimension": "健康",
       "attention_level": "计划",
-      "title": "妙三多第二针",
-      "status": "计划中",
-      "observed": "第一针于 2026-07-03 接种。",
-      "next": "计划 2026-08-01 接种，执行前确认预约和当天健康状态。",
-      "escalate": "实际安排及接种条件以当次兽医判断为准。",
+      "title": "第二针后续免疫计划",
+      "status": "接种后观察完成；后续计划待确认",
+      "observed": "第一针于 2026-07-03 接种；第二针于 2026-07-31 接种。两次批准文号均为兽药生字101736062；第二针回家后立即玩，截至 2026-08-02 未见异常反应。实际生产批号仍待补充。",
+      "next": "向兽医确认本轮基础免疫是否完成、保护起效时间、是否约 26 周龄加强、狂犬疫苗和下一次日期。",
+      "escalate": "脸肿/荨麻疹、反复呕吐、呼吸异常、明显虚弱或倒地时立即联系医院或急诊。",
       "source": "03_health/vaccines.md"
+    },
+    {
+      "id": "oral_care_teething",
+      "dimension": "健康",
+      "attention_level": "计划",
+      "title": "换牙期口腔护理",
+      "status": "待开始",
+      "observed": "按出生日期推算，小咪在 2026-08-02 约 4 个月 8 天；尚无牙龈、乳牙脱落或双排牙的实际观察。",
+      "next": "疫苗后状态稳定再做口腔脱敏；选猫用软毛小头牙刷和猫用牙膏，牙龈疼痛或掉牙集中期不强刷。",
+      "escalate": "发现双排牙、持续口臭、明显流涎、出血、疼痛或不吃时预约兽医。",
+      "source": "06_environment_supplies/grooming.md"
+    },
+    {
+      "id": "food_transition",
+      "dimension": "营养",
+      "attention_level": "计划",
+      "title": "先完成单一主食换粮",
+      "status": "准备开始",
+      "observed": "皇家 1-4 月龄奶糕接近吃完，家中已有一袋皇家 12 月龄以下幼猫粮；主人另考虑皇家与‘美仕/美士’混喂，具体品牌和 SKU 待确认。",
+      "next": "先按至少 7 天完成两袋皇家之间的换粮，便便、食欲和体重稳定 10-14 天后再单独评估第二品牌。",
+      "escalate": "软便、呕吐或明显拒食时停在当前比例或退回上一步；幼猫持续明显食欲下降应尽快联系兽医。",
+      "source": "04_nutrition/diet_plan.md"
+    },
+    {
+      "id": "outdoor_desensitization",
+      "dimension": "行为/环境",
+      "attention_level": "计划",
+      "title": "外部世界脱敏",
+      "status": "室内阶段可开始",
+      "observed": "2026-08-02 主人计划逐步带小咪接触外部世界；尚未记录实际暴露和反应。",
+      "next": "先做室内胸背、固定牵引绳、猫包和召回训练；兽医确认基础免疫起效、狂犬/猫白血病及驱虫计划后再接触公共环境。",
+      "escalate": "贴地僵住、拒绝日常奖励或疯狂后退挣脱时立即退阶；张口呼吸、持续喘或站不稳时停止并按恢复情况联系兽医。",
+      "source": "05_behavior_training/socialization.md"
     },
     {
       "id": "environment_baseline",
@@ -545,6 +613,34 @@
     }
   ],
   "recent_timeline": [
+    {
+      "date": "2026-08-02",
+      "category": "健康/用药",
+      "title": "耳部明显变干净；两项用药细节待核实",
+      "detail": "复方制霉菌素软膏连续使用约 13 天后耳部外观明显改善，主人计划用满 21 天；医生另建议顽固疑似猫癣处每日 2 次使用复方特比萘芬喷剂，但‘擦干’相关步骤记忆不完整。",
+      "source": "02_daily/logs/2026-08.md"
+    },
+    {
+      "date": "2026-08-02",
+      "category": "医疗/计划",
+      "title": "第二针后未见异常，准备换粮与室内外出脱敏",
+      "detail": "第二针回家后立即玩，截至本日未见异常；当前奶糕接近吃完，先换入已有皇家幼猫粮；外部世界脱敏先从室内胸背和猫包开始。",
+      "source": "03_health/vaccines.md"
+    },
+    {
+      "date": "2026-07-31",
+      "category": "医疗/生长",
+      "title": "第二针疫苗，体重 1530 g",
+      "detail": "当天接种第二针疫苗，接种前体重较 2026-07-26 增加 30 g；批准文号为兽药生字101736062，实际生产批号和部分测量条件待补充。",
+      "source": "02_daily/logs/2026-07.md"
+    },
+    {
+      "date": "2026-07-26",
+      "category": "生长",
+      "title": "体重 1500 g",
+      "detail": "12:03 称重；较 2026-07-19 12:55 增加 80 g，仍在持续增长。",
+      "source": "03_health/weight_growth.md"
+    },
     {
       "date": "2026-07-21",
       "category": "健康",
@@ -593,13 +689,6 @@
       "title": "开始 24 小时摄入观察",
       "detail": "记录猫粮和两只水碗，形成当前唯一一次完整核心窗口。",
       "source": "04_nutrition/intake_observations.md"
-    },
-    {
-      "date": "2026-07-03",
-      "category": "医疗",
-      "title": "妙三多第一针",
-      "detail": "回家后感觉较困，晚上恢复活跃；不能确定是否疫苗反应。",
-      "source": "03_health/vaccines.md"
     }
   ],
   "source_links": [
@@ -624,8 +713,18 @@
       "group": "记录"
     },
     {
+      "label": "八月日志",
+      "path": "02_daily/logs/2026-08.md",
+      "group": "记录"
+    },
+    {
       "label": "体重与成长",
       "path": "03_health/weight_growth.md",
+      "group": "记录"
+    },
+    {
+      "label": "疫苗记录",
+      "path": "03_health/vaccines.md",
       "group": "记录"
     },
     {
@@ -644,9 +743,19 @@
       "group": "记录"
     },
     {
+      "label": "当前饮食方案",
+      "path": "04_nutrition/diet_plan.md",
+      "group": "当前"
+    },
+    {
       "label": "行为观察",
       "path": "05_behavior_training/behavior_observations.md",
       "group": "记录"
+    },
+    {
+      "label": "社会化与适应",
+      "path": "05_behavior_training/socialization.md",
+      "group": "当前"
     },
     {
       "label": "居家环境",
