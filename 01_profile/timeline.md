@@ -14,7 +14,7 @@
 | 2026-07-03 | 约 3 个多月 | 体重 1.2 kg；接种硕腾妙三多第一针 | `03_health/vaccines.md` |
 | 2026-07-10 | 约 3 个半月 | 22:21 称重 1300 g | `03_health/weight_growth.md` |
 | 2026-07-18 | 3 个月 23 天 | 观察右耳比左耳更严重，按疑似耳螨使用滴耳液和复方制霉菌素软膏；诊断及用药详情待确认 | `03_health/symptoms_observations.md`、`03_health/medications.md` |
-| 2026-07-19 | 3 个月 24 天 | 12:55 称重 1420 g；12:57 摘下耳部处理后佩戴一整晚的伊丽莎白圈 | `03_health/weight_growth.md`、`02_daily/logs/2026-07.md` |
+| 2026-07-19 | 3 个月 24 天 | 12:55 称重 1420 g；补充记录当日使用大宠爱（幼猫版本）外驱；12:57 摘下耳部处理后佩戴一整晚的伊丽莎白圈。外驱规格、剂量和用后反应待确认 | `03_health/weight_growth.md`、`03_health/deworming_flea_tick.md`、`02_daily/logs/2026-07.md` |
 | 2026-07-21 | 3 个月 26 天 | 耳部处理后仍有褐黑油性分泌物、耳周黑点和皮屑样粘连物；诊断及产品详情待确认 | `03_health/symptoms_observations.md`、`03_health/medications.md` |
 | 2026-07-26 | 4 个月 1 天 | 12:03 称重 1500 g | `03_health/weight_growth.md`、`02_daily/logs/2026-07.md` |
 | 2026-07-31 | 4 个月 6 天 | 接种第二针疫苗，接种前体重 1530 g；批准文号为兽药生字101736062；回家后立即玩，截至 2026-08-02 未观察到异常反应 | `03_health/weight_growth.md`、`03_health/vaccines.md`、`02_daily/logs/2026-07.md` |
