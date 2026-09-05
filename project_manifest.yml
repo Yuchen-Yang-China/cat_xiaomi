@@ -5,7 +5,7 @@ project:
   purpose: "小咪的猫咪生活档案、知识库、问题追踪和长期养育记录"
   primary_language: zh-CN
   visibility: public
-  last_reviewed: 2026-07-13
+  last_reviewed: 2026-09-05
 
 agent_entrypoints:
   - AGENTS.md
@@ -35,11 +35,9 @@ data_layers:
       - 11_insights
       - dashboard.html
   history:
-    description: "历史导入、旧回答、实验和日期快照，仅用于追溯"
+    description: "历史导入确认和日期报告，仅用于追溯"
     paths:
       - 08_questions_decisions/confirmation_questions_2026-07-06.md
-      - 08_questions_decisions/ai_answers.md
-      - 08_questions_decisions/experiments.md
       - 04_nutrition/reports
 
 areas:
@@ -54,7 +52,7 @@ areas:
   daily:
     path: 02_daily
     role: source
-    description: "日常作息、日志和生活变化"
+    description: "月度日志和生活变化；稳定基线归入 01_profile/baseline.md"
   health:
     path: 03_health
     role: source
@@ -78,7 +76,7 @@ areas:
   questions_decisions:
     path: 08_questions_decisions
     role: mixed
-    description: "问题、AI 回答、实验、决策"
+    description: "开放问题、行动队列和重要决策"
   media:
     path: 09_media
     role: attachment

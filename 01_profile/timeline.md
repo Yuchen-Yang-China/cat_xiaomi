@@ -19,3 +19,9 @@
 | 2026-07-26 | 4 个月 1 天 | 12:03 称重 1500 g | `03_health/weight_growth.md`、`02_daily/logs/2026-07.md` |
 | 2026-07-31 | 4 个月 6 天 | 接种第二针疫苗，接种前体重 1530 g；批准文号为兽药生字101736062；回家后立即玩，截至 2026-08-02 未观察到异常反应 | `03_health/weight_growth.md`、`03_health/vaccines.md`、`02_daily/logs/2026-07.md` |
 | 2026-08-02 | 4 个月 8 天 | 回顾连续使用复方制霉菌素软膏约 13 天后耳朵明显变干净；补充 2026-07-31 医生对顽固疑似猫癣处每日 2 次使用复方特比萘芬喷剂的建议，完整用法待确认 | `03_health/medications.md`、`03_health/skin_ringworm.md`、`02_daily/logs/2026-08.md` |
+| 2026-08-23 至 2026-08-27 | 约 5 个月 | 完成 94 小时 56 分钟猫粮和水碗连续称重；同时记录约 1.9 kg 的抱称差值估计，以及近期约 2-3 次便后粘肛周毛、出盆后摩擦的观察 | `04_nutrition/intake_observations.md`、`03_health/weight_growth.md`、`03_health/symptoms_observations.md` |
+| 2026-08-27 | 5 个月 2 天 | 接种第三针疫苗；产品标签、接种时体重和用后反应待补 | `03_health/vaccines.md`、`02_daily/logs/2026-08.md` |
+| 2026-08-31 | 5 个月 6 天 | 23:26 喂海乐妙 1 粒，主人称“14 mg 的内驱药”；产品完整标签、适用体重范围及用后反应待确认 | `03_health/deworming_flea_tick.md`、`02_daily/logs/2026-08.md` |
+| 2026-08-31 | 5 个月 6 天 | 海乐妙给药当日出现一次半干半软便，之后完全恢复正常 | `03_health/deworming_flea_tick.md`、`03_health/symptoms_observations.md` |
+| 2026-09-05 | 5 个月 11 天 | 确认当前吃皇家 12 月龄以下幼猫全价猫粮，切换时未做渐进换粮；耳朵非常干净、未再发现疑似猫癣，所有药物已停用 | `01_profile/baseline.md`、`03_health/medications.md`、`04_nutrition/diet_plan.md` |
+| 2026-09-05 | 5 个月 11 天 | 观察到最近先换上牙，随后开始换下牙，进入可见的乳恒牙替换阶段 | `01_profile/baseline.md`、`06_environment_supplies/grooming.md` |

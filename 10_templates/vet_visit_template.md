@@ -10,12 +10,14 @@
 - 诊断/判断：
 - 医嘱：
 - 药物：
+- 药物/疫苗/驱虫产品全名与规格：
+- 剂量、频率、疗程和给药依据：
+- 当日体重与测量方式：
 - 费用：
 - 复查时间：
-- 附件：
+- 附件（只记录已脱敏路径；不要写医院、医生或照护者身份信息）：
 - 需要更新的文件：
   - `03_health/vet_visits.md`
   - `03_health/medications.md`
   - `03_health/weight_growth.md`
   - `01_profile/baseline.md`
-

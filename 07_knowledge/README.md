@@ -5,12 +5,13 @@
 ## 文件说明
 
 - `cat_language.md`：肢体语言、叫声、情绪信号。
-- `development_stages.md`：成长阶段和发展任务。
 - `health_basics.md`：健康观察基础和就医沟通。
 - `nutrition_basics.md`：饮食和营养基础。
 - `behavior_psychology.md`：行为心理、压力、奖励、环境需求。
 - `safety_toxicity.md`：居家安全、潜在有害物、误食风险。
 - `sources.md`：信息来源和可信度记录。
+
+小咪自己的年龄和阶段任务统一维护在 `01_profile/cat_profile.md`、`01_profile/baseline.md` 与行动队列，不在通用知识目录重复一份容易过期的快照。
 
 ## 记录格式
 
@@ -22,4 +23,3 @@
 - 是否已用于小咪：
 - 关联记录：
 - 仍需确认：
-

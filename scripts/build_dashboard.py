@@ -105,6 +105,30 @@ def validate(data: dict) -> list[str]:
     if not close_enough(segment_share, 100, tolerance=0.2):
         errors.append(f"Clock-segment shares sum to {segment_share}, expected about 100")
 
+    recent = nutrition["recent_continuous_observation"]
+    recent_normalized_food = recent["dry_food_bowl_loss_g"] * 1440 / recent["minutes"]
+    if not close_enough(
+        recent["normalized_dry_food_bowl_loss_g_per_24h"], recent_normalized_food
+    ):
+        errors.append("Recent normalized dry-food value does not match the observation")
+
+    recent_timing = recent["timing"]
+    recent_segments = recent_timing["clock_segments"]
+    recent_segment_total = sum(item["estimated_bowl_loss_g"] for item in recent_segments)
+    if not close_enough(recent_segment_total, recent["dry_food_bowl_loss_g"]):
+        errors.append("Recent timing segments do not match total dry-food bowl loss")
+    recent_segment_share = sum(item["share_percent"] for item in recent_segments)
+    if not close_enough(recent_segment_share, 100, tolerance=0.2):
+        errors.append(
+            f"Recent clock-segment shares sum to {recent_segment_share}, expected about 100"
+        )
+    for item in recent_segments:
+        expected_rate = item["estimated_bowl_loss_g"] / item["observed_hours"]
+        if not close_enough(item["average_rate_g_per_hour"], expected_rate):
+            errors.append(
+                f"Recent timing rate does not match grams/hours for {item['label']}"
+            )
+
     bowls = nutrition["water_bowls"]
     bowl_sum = bowls["white_bowl_loss_ml"] + bowls["yellow_bowl_loss_ml"]
     if not close_enough(bowls["gross_loss_ml"], bowl_sum):
@@ -667,19 +691,20 @@ def render(data: dict) -> str:
       <div class="section-head">
         <div>
           <h2 id="rhythm-title">她什么时候最爱吃</h2>
-          <p>一次完整观察里，傍晚到夜间的摄入明显集中，和她晚上爱玩的习惯对得上。</p>
+          <p>两轮称重给出的线索不同：8 月连续记录中，凌晨到中午的估算碗内减少速度更高；实际进食时刻未知，暂不能定义固定偏好。</p>
         </div>
-        <a href="04_nutrition/reports/2026-07-07_24h_intake_analysis.md">打开完整报告</a>
+        <a href="04_nutrition/intake_observations.md">打开连续观察记录</a>
       </div>
       <div class="rhythm-grid">
         <div>
           <div class="rhythm-callout" id="rhythm-callout"></div>
-          <div class="stacked-bar" id="rhythm-bar" role="img" aria-label="一次 24 小时观察的进食时段估算分布"></div>
+          <div class="stacked-bar" id="rhythm-bar" role="img" aria-label="2026-08-23 至 27 按称重区间估算的各时段碗内减少量分布，不是逐小时实测"></div>
           <div class="legend" id="rhythm-legend"></div>
           <p class="fine-print" id="rhythm-limitation"></p>
+          <p class="fine-print" id="rhythm-history"></p>
         </div>
         <div>
-          <h3>两只水碗的减少量</h3>
+          <h3>2026-07 单日：两只水碗的减少量</h3>
           <div class="bowl-comparison" id="bowl-comparison"></div>
           <p class="fine-print" id="bowl-limitation"></p>
         </div>
@@ -747,7 +772,7 @@ def render(data: dict) -> str:
       const profile = data.profile;
       document.getElementById('profile-strip').innerHTML = [
         ['当时年龄', profile.age_label_as_of],
-        ['最近体重', `${{(profile.latest_weight_g / 1000).toFixed(2)}} kg`],
+        ['最近体重', profile.latest_weight_display || `${{(profile.latest_weight_g / 1000).toFixed(2)}} kg`],
         ['到家日期', profile.arrival_date],
         ['花色记录', profile.coat]
       ].map(([label, value]) => `<div><dt>${{escapeHtml(label)}}</dt><dd>${{escapeHtml(value)}}</dd></div>`).join('');
@@ -775,10 +800,20 @@ def render(data: dict) -> str:
       `).join('');
 
       const growth = data.growth.summary;
+      const overallGrowth = {{
+        value: growth.overall_average_display || `${{growth.daily_gain_range_g[0]}}-${{growth.daily_gain_range_g[1]}} g/日`,
+        title: growth.overall_average_title || '总体平均增速',
+        text: growth.overall_average_text || `范围来自起点称重时刻未知；按日期差为 ${{growth.daily_gain_by_date_g}} g/日。`
+      }};
+      const recentGrowth = {{
+        value: growth.recent_window_display || `${{growth.recent_window_weekly_gain_g}} g/周`,
+        title: growth.recent_window_title || '近约三周平均',
+        text: growth.recent_window_text || `${{growth.recent_window_start}} 至 ${{growth.recent_window_end}} 共 ${{growth.recent_window_days}} 天增加 ${{growth.recent_window_gain_g}} g；现有节点没有停滞或下降。`
+      }};
       document.getElementById('growth-summary').innerHTML = [
         {{ value: `+${{growth.gain_g}} g`, title: '到家以来', text: `标准日期差 ${{growth.elapsed_days_by_date}} 天，体重增加 ${{growth.gain_percent}}%。` }},
-        {{ value: `${{growth.daily_gain_range_g[0]}}-${{growth.daily_gain_range_g[1]}} g/日`, title: '总体平均增速', text: `范围来自起点称重时刻未知；按日期差为 ${{growth.daily_gain_by_date_g}} g/日。` }},
-        {{ value: `${{growth.recent_window_weekly_gain_g}} g/周`, title: '近约三周平均', text: `${{growth.recent_window_start}} 至 ${{growth.recent_window_end}} 共 ${{growth.recent_window_days}} 天增加 ${{growth.recent_window_gain_g}} g；现有节点没有停滞或下降。` }}
+        overallGrowth,
+        recentGrowth
       ].map(item => `
         <div class="analysis-item">
           <div class="value">${{escapeHtml(item.value)}}</div>
@@ -872,22 +907,29 @@ def render(data: dict) -> str:
       renderWeightChart();
 
       const rhythm = data.nutrition_and_rhythm;
-      const evening = rhythm.direct_evening_window;
+      const recentObservation = rhythm.recent_continuous_observation;
+      const timing = recentObservation.timing;
+      const rateFor = items => items.reduce((total, item) => total + item.estimated_bowl_loss_g, 0)
+        / items.reduce((total, item) => total + item.observed_hours, 0);
+      const beforeNoonRate = rateFor(timing.clock_segments.slice(0, 2)).toFixed(2);
+      const afterNoonRate = rateFor(timing.clock_segments.slice(2)).toFixed(2);
       document.getElementById('rhythm-callout').innerHTML = `
-        <strong>${{evening.hours}} 小时吃了 ${{evening.consumed_g}} g</strong>
-        <span>占核心全天 ${{evening.share_percent}}%，平均速度约为其余时间的 ${{evening.rate_ratio}} 倍。</span>
+        <strong>目前更像凌晨到中午会持续进食</strong>
+        <span>8 月连续记录中，00–12 的估算平均速度约 ${{beforeNoonRate}} g/h，12–24 约 ${{afterNoonRate}} g/h；${{escapeHtml(timing.conclusion)}}</span>
       `;
-      document.getElementById('rhythm-bar').innerHTML = rhythm.clock_segments.map(item => `
-        <span class="stacked-segment" style="width:${{item.share_percent}}%" aria-label="${{escapeHtml(item.label)}} ${{item.share_percent}}%"></span>
+      document.getElementById('rhythm-bar').innerHTML = timing.clock_segments.map(item => `
+        <span class="stacked-segment" style="width:${{item.share_percent}}%" aria-label="${{escapeHtml(item.label)}}：估算 ${{item.estimated_bowl_loss_g}} g，平均 ${{item.average_rate_g_per_hour}} g/h"></span>
       `).join('');
-      document.getElementById('rhythm-legend').innerHTML = rhythm.clock_segments.map(item => `
+      document.getElementById('rhythm-legend').innerHTML = timing.clock_segments.map(item => `
         <div class="legend-item">
           <span class="swatch" aria-hidden="true"></span>
           <span>${{escapeHtml(item.label)}}</span>
-          <span class="legend-value">${{item.grams}} g · ${{item.share_percent}}%</span>
+          <span class="legend-value">${{item.estimated_bowl_loss_g}} g · ${{item.average_rate_g_per_hour}} g/h</span>
         </div>
       `).join('');
-      document.getElementById('rhythm-limitation').textContent = rhythm.clock_segments_limitation;
+      document.getElementById('rhythm-limitation').textContent = `${{timing.method}} ${{timing.limitation}}`;
+      const evening = rhythm.direct_evening_window;
+      document.getElementById('rhythm-history').innerHTML = `<strong>历史单日线索：</strong>2026-07 的一次观察中，${{evening.start.slice(11)}} 至 ${{evening.end.slice(11)}} 约 ${{evening.hours}} 小时减少 ${{evening.consumed_g}} g，占核心 24 小时 ${{evening.share_percent}}%。它提示过傍晚到夜间较集中，但样本仅一天，不并入本次结论。`;
 
       const bowls = rhythm.water_bowls;
       const bowlData = [

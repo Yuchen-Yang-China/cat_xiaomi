@@ -1,24 +1,25 @@
 {
   "schema_version": 1,
   "meta": {
-    "as_of": "2026-08-23",
+    "as_of": "2026-09-05",
     "title": "小咪当前多维照护快照",
-    "record_window": "2026-05-30 至 2026-08-23",
+    "record_window": "2026-05-30 至 2026-09-05",
     "purpose": "将现有记录整理成可追溯的趋势、线索和行动入口",
     "medical_boundary": "派生分析不等于诊断；健康与用药相关决定以兽医面诊和当次医嘱为准",
     "source_of_truth": "带日期的月度日志和专题记录",
-    "sample_warning": "摄入与水碗分析目前只有一次 24 小时核心观察，n=1"
+    "sample_warning": "2026-07 有一次完整 24 小时核心观察；2026-08 新增连续 94 小时 56 分钟称重，但食物变量、补充记录和对照碗干扰不同，不能直接合并为稳定基线"
   },
   "profile": {
     "name": "小咪",
     "sex": "母猫",
     "birth_date": "2026-03-25",
-    "age_days_as_of": 151,
-    "age_label_as_of": "4 个月 29 天",
+    "age_days_as_of": 164,
+    "age_label_as_of": "5 个月 11 天",
     "arrival_date": "2026-05-30",
     "coat": "紫金渐层",
-    "latest_weight_g": 1530,
-    "latest_weight_at": "2026-07-31",
+    "latest_weight_g": 1900,
+    "latest_weight_at": "2026-08-27",
+    "latest_weight_display": "约 1.9 kg",
     "source": "01_profile/cat_profile.md"
   },
   "evidence_types": [
@@ -53,25 +54,49 @@
       "id": "latest_weight",
       "dimension": "生长",
       "label": "最近体重",
-      "value": 1530,
+      "value": 1900,
       "unit": "g",
-      "display": "1.53 kg",
-      "window": "2026-07-31",
-      "evidence_type": "recorded",
+      "display": "约 1.9 kg",
+      "window": "2026-08-27",
+      "evidence_type": "estimated",
       "source": "03_health/weight_growth.md",
-      "limitation": "已确认在接种前称重；具体时间、工具/地点未记录"
+      "limitation": "抱小咪与单独上人体秤的差值；小咪变大后操作不便，属低精度估计，不能与既往节点精确比较"
     },
     {
       "id": "growth_recent_window",
       "dimension": "生长",
-      "label": "近四周平均增重",
-      "value": 82.5,
-      "unit": "g/week",
-      "display": "82.5 g/周",
-      "window": "2026-07-03 至 2026-07-31",
+      "label": "近四周体重名义差值",
+      "value": 370,
+      "unit": "g",
+      "display": "约 +370 g",
+      "window": "2026-07-31 至 2026-08-27",
       "evidence_type": "estimated",
       "source": "03_health/weight_growth.md",
-      "limitation": "按相隔 28 个日期日的两个记录值折算；称重时刻和工具不完全一致"
+      "limitation": "终点为抱称差值估计，称重方式和精度不同；只表示两个节点的名义差值，不解读增速"
+    },
+    {
+      "id": "recent_dry_bowl_loss",
+      "dimension": "营养",
+      "label": "连续观察猫粮碗内减少",
+      "value": 28.31,
+      "unit": "g/24h",
+      "display": "约 28.3 g/24h",
+      "window": "2026-08-23 23:29 至 2026-08-27 22:25",
+      "evidence_type": "estimated",
+      "source": "04_nutrition/intake_observations.md",
+      "limitation": "112 g 碗内减少量按 94 小时 56 分钟折算；不含生食、未称重冻干和可能撒落，主食配方未记录"
+    },
+    {
+      "id": "recent_water_bowl_loss",
+      "dimension": "饮水",
+      "label": "连续观察水碗减少量",
+      "value": 72.05,
+      "unit": "ml/24h",
+      "display": "约 72.0 ml/24h",
+      "window": "2026-08-23 23:29 至 2026-08-27 22:25",
+      "evidence_type": "estimated",
+      "source": "04_nutrition/water_hydration.md",
+      "limitation": "两只水碗 285 g 质量减少按全窗口折算；对照碗被小咪喝过且补充记录有异常，不等于实际饮水量"
     },
     {
       "id": "dry_food_24h",
@@ -124,41 +149,47 @@
       "limitation": "以成型便为当前基线，曾有新食物相关软便/拖便"
     },
     {
-      "id": "evening_food_share",
+      "id": "recent_before_noon_rate",
       "dimension": "作息",
-      "label": "晚间核心窗口进食占比",
-      "value": 38.8,
-      "unit": "%",
-      "display": "38.8%",
-      "window": "2026-07-07 19:37 至 2026-07-08 00:29",
+      "label": "连续观察：00–12 估算速度",
+      "value": 1.42,
+      "unit": "g/h",
+      "display": "约 1.42 g/h",
+      "window": "2026-08-23 23:29 至 2026-08-27 22:25",
       "evidence_type": "estimated",
-      "source": "04_nutrition/reports/2026-07-07_24h_intake_analysis.md",
-      "limitation": "占一次核心 24 小时记录；不能直接视为长期作息"
+      "source": "04_nutrition/data/2026-08-23_clock_distribution.csv",
+      "limitation": "将长称重区间内的碗内减少量按经过时间均匀分配；不是逐小时实测，不能确定固定最爱吃时段"
     }
   ],
   "growth": {
     "summary": {
       "start_date": "2026-05-30",
-      "end_date": "2026-07-31",
-      "elapsed_days_by_date": 62,
-      "calendar_dates_covered": 63,
+      "end_date": "2026-08-27",
+      "elapsed_days_by_date": 89,
+      "calendar_dates_covered": 90,
       "start_weight_g": 560,
-      "end_weight_g": 1530,
-      "gain_g": 970,
-      "gain_percent": 173.2,
-      "daily_gain_by_date_g": 15.65,
+      "end_weight_g": 1900,
+      "gain_g": 1340,
+      "gain_percent": 239.3,
+      "daily_gain_by_date_g": 15.06,
       "daily_gain_range_g": [
-        15.4,
-        15.9
+        15.0,
+        15.1
       ],
-      "recent_window_start": "2026-07-03",
-      "recent_window_end": "2026-07-31",
-      "recent_window_days": 28,
-      "recent_window_gain_g": 330,
-      "recent_window_daily_gain_g": 11.79,
-      "recent_window_weekly_gain_g": 82.5,
-      "direction": "持续上升，现有节点没有停滞或下降",
-      "limitation": "起点称重时刻和称重工具缺失；短间隔变化混有进食、排泄和测量误差"
+      "recent_window_start": "2026-07-31",
+      "recent_window_end": "2026-08-27",
+      "recent_window_days": 27,
+      "recent_window_gain_g": 370,
+      "recent_window_daily_gain_g": 13.7,
+      "recent_window_weekly_gain_g": 95.9,
+      "direction": "总体上升；最新节点为低精度估计值",
+      "limitation": "起点称重时刻和称重工具缺失；最新节点为抱称差值估计，短间隔或跨工具变化混有进食、排泄和测量误差",
+      "overall_average_title": "全期名义平均变化",
+      "overall_average_display": "约 15.1 g/日",
+      "overall_average_text": "按 2026-05-30 至 2026-08-27 的日期差计算，包含估计体重点，只作历史算术汇总，不代表精确生理增速。",
+      "recent_window_title": "近四周体重名义差值",
+      "recent_window_display": "约 +370 g",
+      "recent_window_text": "2026-07-31 的 1530 g 与 2026-08-27 的约 1900 g 之间相差约 370 g；终点为抱称差值估计，不据此评价增速或体况。"
     },
     "weight_history": [
       {
@@ -275,6 +306,14 @@
         "value_type": "recorded",
         "date_precision": "day",
         "note": "主人确认在接种第二针前称重；测量时间、工具/地点及当时进食和排泄状态待确认"
+      },
+      {
+        "date": "2026-08-27",
+        "age_days": 155,
+        "weight_g": 1900,
+        "value_type": "estimated",
+        "date_precision": "day",
+        "note": "主人以抱小咪和单独上人体秤的差值估计；小咪变大后操作不便，低精度，不用于精确增长速度判断"
       }
     ],
     "weekly_intervals": [
@@ -344,6 +383,58 @@
       "food_energy_limitation": "包装实际代谢能待核对；冻干奖励未计入",
       "sample_size_days": 1
     },
+    "recent_continuous_observation": {
+      "start": "2026-08-23 23:29",
+      "end": "2026-08-27 22:25",
+      "minutes": 5696,
+      "dry_food_bowl_loss_g": 112,
+      "normalized_dry_food_bowl_loss_g_per_24h": 28.31,
+      "gross_water_bowl_loss_ml": 285,
+      "normalized_gross_water_bowl_loss_ml_per_24h": 72.05,
+      "estimated_body_weight_kg": 1.9,
+      "estimated_gross_water_bowl_loss_ml_per_kg_day": 37.92,
+      "provided_raw_seafood_g": 78,
+      "unweighed_freeze_dried_count": 4,
+      "evidence_type": "estimated",
+      "limitation": "猫粮量仅为碗内减少，不含生食、未称重冻干或可能撒落；水碗减少不等于饮水。2026-08-26 15:38 的 563.5 g 按吃空后补粮处理；对照碗被小咪喝过，且一处补充后重量异常，不能可靠扣除蒸发或与 7 月单次观察直接比较。",
+      "timing": {
+        "label": "2026-08-23 至 2026-08-27 连续称重",
+        "evidence_type": "estimated",
+        "conclusion": "按长称重区间内均匀减少的估算，凌晨到中午的平均碗内减少速度高于下午到夜间；两轮观察结果不同，暂不足以定义固定的最爱吃时段。",
+        "method": "将每次称重或补粮后到下一次称重前的碗内减少量，按经过时间比例分配到钟点段；跨午夜区间单独拆分。",
+        "clock_segments": [
+          {
+            "label": "凌晨 00–06",
+            "observed_hours": 24,
+            "estimated_bowl_loss_g": 34.58,
+            "share_percent": 30.9,
+            "average_rate_g_per_hour": 1.44
+          },
+          {
+            "label": "上午 06–12",
+            "observed_hours": 24,
+            "estimated_bowl_loss_g": 33.35,
+            "share_percent": 29.8,
+            "average_rate_g_per_hour": 1.39
+          },
+          {
+            "label": "下午 12–18",
+            "observed_hours": 24,
+            "estimated_bowl_loss_g": 25.48,
+            "share_percent": 22.8,
+            "average_rate_g_per_hour": 1.06
+          },
+          {
+            "label": "晚上 18–24",
+            "observed_hours": 22.93,
+            "estimated_bowl_loss_g": 18.58,
+            "share_percent": 16.6,
+            "average_rate_g_per_hour": 0.81
+          }
+        ],
+        "limitation": "不是逐小时实测；称重区间较长，不能定位她在区间内何时真正进食。2026-08-26 15:38 的补粮解释若有误，时段估算也需重算。"
+      }
+    },
     "direct_evening_window": {
       "start": "2026-07-07 19:37",
       "end": "2026-07-08 00:29",
@@ -410,7 +501,10 @@
       "04_nutrition/intake_observations.md",
       "04_nutrition/reports/2026-07-07_24h_intake_analysis.md",
       "04_nutrition/data/2026-07-07_clock_distribution.csv",
-      "04_nutrition/data/2026-07-07_water_bowls.csv"
+      "04_nutrition/data/2026-08-23_clock_distribution.csv",
+      "04_nutrition/data/2026-07-07_water_bowls.csv",
+      "04_nutrition/water_hydration.md",
+      "02_daily/logs/2026-08.md"
     ]
   },
   "elimination": {
@@ -427,30 +521,33 @@
       "evidence_type": "observed"
     },
     "litter_box_use": "稳定使用",
-    "recent_note": "2026-07-13 记录昨晚排便正常，早上两个尿团（一大一正常）",
-    "limitation": "没有与水碗观察同步的尿团重量；单次大尿团不能代表尿量增加",
+    "recent_note": "2026-08-27 曾补充近期约 2-3 次便后粘肛周毛并摩擦；2026-08-31 海乐妙给药当日一次半干半软便，之后完全正常",
+    "limitation": "没有与连续水碗观察同步的尿团重量；粘毛事件缺少准确日期和便形。海乐妙与单次软便有时间关联，但不能仅凭一次观察确认因果",
     "sources": [
       "01_profile/baseline.md",
       "05_behavior_training/litter_box.md",
-      "02_daily/logs/2026-07.md"
+      "02_daily/logs/2026-07.md",
+      "02_daily/logs/2026-08.md",
+      "02_daily/logs/2026-09.md",
+      "03_health/symptoms_observations.md"
     ]
   },
   "dimensions": [
     {
       "id": "health",
       "label": "健康与生长",
-      "observed": "体重持续增加，2026-07-31 接种第二针前体重为 1530 g；第二针回家后立即玩，截至 2026-08-02 未见异常反应。复方制霉菌素软膏连续使用约 13 天后，主人观察耳朵明显变干净；同次接种时医生建议顽固疑似猫癣处使用复方特比萘芬喷剂每日 2 次。2026-07-19 另记录使用大宠爱（幼猫版本）外驱，规格、剂量和用后反应待确认。",
-      "meaning": "耳部外观改善是有价值的治疗后观察，但不能单独确认耳螨、酵母、细菌或炎症已经清除；皮肤喷药方向来自医生，完整操作仍需核实。",
-      "limitation": "耳部未记录耳镜/耳垢检查确诊，软膏产品、位置、剂量、连续疗程起点和 21 天依据不完整；疑似猫癣也未记录真菌检查，喷剂产品、用量、疗程和‘擦干’相关步骤待确认；外驱产品规格、剂量、给药时间和用后反应不完整，不能据此判断覆盖范围或效果。",
-      "next": "拍两种皮肤/耳部产品正反面并向医院核实疗程和完整用法；补齐大宠爱包装、剂量、用药间隔和用后反应；耳药疗程结束时考虑耳镜/耳垢细胞学复查，顽固皮损持续时确认真菌诊断。"
+      "observed": "2026-09-05 主人观察耳朵非常干净、未再发现疑似猫癣，所有药物均已停用；最近还观察到先换上牙、随后开始换下牙。2026-08-31 海乐妙给药当日有一次半干半软便，之后完全正常。第三针疫苗已于 2026-08-27 接种，兽医曾提醒 2026-09-12 检测抗体。",
+      "meaning": "小咪在 5 个月 11 天时进入可见的乳恒牙替换阶段，当前顺序本身不提示异常；耳部和皮肤无需继续历史疗程。9 月 12 日距离第三针只有 16 天，需核对检测方法和时间依据。",
+      "limitation": "耳部和皮肤是肉眼观察，没有耳镜、耳垢或真菌学复查；最新体重为低精度估计；海乐妙产品标签不完整；第三针产品、标签、当日体重和反应待补。",
+      "next": "现在预约绝育术前评估，检查合格时以 2026-09 中下旬为候选；同时继续换牙观察，复核抗体检测时间，并在约 2026-09-30 前确定寄生虫预防方案。"
     },
     {
       "id": "nutrition",
       "label": "营养与排泄",
-      "observed": "一次 24 小时核心观察中，干粮约 51.4 g；日常约 4-5 个尿团、1-2 团成型便。2026-08-02 当前皇家 1-4 月龄奶糕接近吃完，家中已有皇家 12 月龄以下幼猫粮。",
-      "meaning": "这一天没有吃空碗，记录本身不支持吃粮不足；排泄有可用基线。",
-      "limitation": "只有一天精确摄入；冻干未计，湿粮实际吃下量和包装能量未记录。",
-      "next": "先按至少 7 天完成现有两袋皇家之间的换粮；稳定 10-14 天前不同时引入第二品牌或其他新食物。"
+      "observed": "当前主食为皇家 12 月龄以下幼猫全价猫粮，切换时未做渐进换粮，尚未记录持续不耐受。2026-08-23 至 27 的连续称重中，猫粮碗内减少约 112 g、两只水碗质量减少约 285 g；同期有生虾、三文鱼和冻干等未完整计量变量。",
+      "meaning": "当前粮若持续吃得好、便便稳定、体重和体况合适，没有仅为更换品牌而换粮的必要；如希望增加水分，逐步加入幼猫全价湿粮比无目的换另一款干粮更有方向性。",
+      "limitation": "猫粮具体配方、零食吃完量、撒落、尿团和便形未同步记录；对照碗已被小咪喝过且补充记录有异常，不能精确扣除蒸发，也不能把粘毛排便归因于某一项食物。",
+      "next": "拍当前猫粮包装的产品名、代谢能和喂量表；获得准确体重与体况后再校准克数。以后换粮用 7-10 天渐进过程，一次只新增一种食物。"
     },
     {
       "id": "behavior",
@@ -471,20 +568,21 @@
   ],
   "cross_dimension_clues": [
     {
-      "title": "夜间活动与进食同向",
-      "evidence": "19:37 至 00:29 吃了 20 g，接近核心全天四成；日常记录也显示晚上更活跃。",
-      "interpretation": "这是很有意思的初步节律线索。",
-      "limitation": "摄入只观察了一天，不能定义为长期稳定作息。",
+      "title": "两轮进食节律仍需继续观察",
+      "evidence": "2026-07 单日观察曾在 19:37 至 00:29 记录 20 g；2026-08 连续称重按区间均匀分配后，00–12 的估算速度约 1.42 g/h，高于 12–24 的约 0.94 g/h。",
+      "interpretation": "小咪白天、夜间都可能自助进食；目前更值得保留的是两种不同条件下的线索，而不是给她贴上固定钟点偏好。",
+      "limitation": "7 月仅一天；8 月不是逐小时实测，且有一处补粮解释。两轮数据都不足以定义长期稳定作息。",
       "sources": [
         "04_nutrition/intake_observations.md",
-        "02_daily/sleep_activity.md"
+        "04_nutrition/data/2026-08-23_clock_distribution.csv",
+        "01_profile/baseline.md"
       ]
     },
     {
-      "title": "生长与摄入方向协调",
-      "evidence": "体重持续上升，同时一次 24 小时记录中食物始终可得且摄入稳定。",
-      "interpretation": "现有记录没有呈现体重停滞或明显进食不足。",
-      "limitation": "两类数据窗口不同，不能计算相关性或证明因果。",
+      "title": "最新体重与新一轮摄入记录只能并行追踪",
+      "evidence": "2026-08-27 有约 1.9 kg 的低精度体重估计；此前 94 小时 56 分钟中猫粮碗内减少约 112 g，且 8 月 26 日曾吃空后补粮。",
+      "interpretation": "现有资料方向上没有提示停止生长，但不该把碗内减少量、零食和估计体重拼成精确的能量或生长结论。",
+      "limitation": "体重测量精度、主食配方、零食吃完量和是否撒落未统一记录，不能计算相关性或证明因果。",
       "sources": [
         "03_health/weight_growth.md",
         "04_nutrition/intake_observations.md"
@@ -501,10 +599,10 @@
       ]
     },
     {
-      "title": "多变量事件不能拆分归因",
-      "evidence": "洗澡和猫薄荷是同次暴露，随后记录亢奋、高频呼吸和软便；两种虾和三文鱼也是同日尝试。",
-      "interpretation": "今后一次只改变一个变量，反应会更容易判断。",
-      "limitation": "现有记录不能分别确认哪一个变量导致反应，也不能分别确认每种新食物耐受。",
+      "title": "新食物与近期粘毛排便不能拆分归因",
+      "evidence": "8 月 24 日和 26 日分别记录提供生虾/三文鱼，且近期另有约 2-3 次粪便粘肛周毛、出盆后摩擦的观察；各次排便的准确日期和便形没有同步记录。",
+      "interpretation": "先让每次新食物、吃完量和之后 24-48 小时的便形一一对应，会比回头猜测原因更有帮助。",
+      "limitation": "现有记录不能确认是哪一种食物、毛发长度、便便质地或肛周情况导致粘毛，也不能确认每种食物耐受。",
       "sources": [
         "03_health/symptoms_observations.md",
         "04_nutrition/treats_reactions.md"
@@ -512,28 +610,6 @@
     }
   ],
   "followups": [
-    {
-      "id": "skin_recheck",
-      "dimension": "健康",
-      "attention_level": "中",
-      "title": "疑似皮肤问题待复查",
-      "status": "待复查",
-      "observed": "头顶、左脸、左手关节曾在涂药前紫外灯下发绿；2026-07-13 耳朵也出现疑似皮肤变化。2026-07-31 医生建议顽固疑似猫癣处使用复方特比萘芬喷剂每日 2 次，但产品和完整用法待确认。",
-      "next": "确认医生所指病灶，拍产品正反面并向医院核实每次用量、疗程，以及‘擦干’是喷前、喷后还是其他步骤；不按模糊记忆补全。",
-      "escalate": "持续、扩散或复发时预约兽医检查，不自行恢复旧药方案。",
-      "source": "03_health/skin_ringworm.md"
-    },
-    {
-      "id": "eyes_nose_ears",
-      "dimension": "健康",
-      "attention_level": "中",
-      "title": "耳部问题、用药及眼鼻表现待确认",
-      "status": "外观改善；疗程和诊断待确认",
-      "observed": "每天少量眼屎和黑色鼻屎、非常偶尔喷嚏；2026-07-18 观察右耳更严重并开始相关处理，2026-08-02 回顾连续使用复方制霉菌素软膏约 13 天后耳朵明显变干净。",
-      "next": "停止深入掏耳道；拍软膏包装并确认位置、次数、21 天依据。疗程结束时考虑耳镜和耳垢显微/细胞学复查。",
-      "escalate": "频繁甩头/抓耳、异味、明显疼痛、头歪/失衡、耳部出血或脓性分泌物、食欲或精神下降时提前联系兽医。",
-      "source": "03_health/symptoms_observations.md"
-    },
     {
       "id": "linear_object_safety",
       "dimension": "环境",
@@ -549,21 +625,21 @@
       "id": "deworming_confirm",
       "dimension": "健康",
       "attention_level": "计划",
-      "title": "核对外驱记录与后续驱虫方案",
-      "status": "外驱已记录；细节和体内方案待确认",
-      "observed": "2026-07-19 已记录大宠爱（幼猫版本）外驱；产品规格、剂量、批号/有效期、给药时间和用后反应待补齐。上次体内驱虫为 2026-06-04 海乐妙，规格不明。",
-      "next": "核对大宠爱包装、剂量和用药间隔；体内驱虫按当日体重和产品规格向兽医确认，不复制历史剂量或叠加体外产品。",
-      "escalate": "不要复制历史剂量或叠加多个体外驱虫产品。",
+      "title": "确定 6 月龄前后的寄生虫预防方案",
+      "status": "2026-08-31 体内给药反应已补；下一次方案待确认",
+      "observed": "2026-07-19 已记录大宠爱幼猫版本外驱；2026-08-31 海乐妙给药当日一次半干半软便，之后完全正常。小咪曾有跳蚤、生食记录，并计划外出脱敏。",
+      "next": "约 2026-09-30 前重新称重，核对所有产品活性成分与覆盖范围；按当前风险选一种无重复成分的兽医方案，满 6 月龄后再按室内外、生食/捕食和当地风险复盘。",
+      "escalate": "脸肿、瘙痒、反复呕吐、虚弱、呼吸异常等疑似用药反应时尽快联系兽医；不要复制历史剂量或叠加多个体外产品。",
       "source": "03_health/deworming_flea_tick.md"
     },
     {
-      "id": "vaccine_second",
+      "id": "vaccine_antibody_plan",
       "dimension": "健康",
       "attention_level": "计划",
-      "title": "第二针后续免疫计划",
-      "status": "接种后观察完成；后续计划待确认",
-      "observed": "第一针于 2026-07-03 接种；第二针于 2026-07-31 接种。两次批准文号均为兽药生字101736062；第二针回家后立即玩，截至 2026-08-02 未见异常反应。实际生产批号仍待补充。",
-      "next": "向兽医确认本轮基础免疫是否完成、保护起效时间、是否约 26 周龄加强、狂犬疫苗和下一次日期。",
+      "title": "补全第三针信息并复核抗体检测时间",
+      "status": "第三针日期已补；2026-09-12 检测待复核",
+      "observed": "第一针 2026-07-03、第二针 2026-07-31、第三针 2026-08-27。第三针产品和反应待补；兽医提醒 2026-09-12 检测抗体，该日距第三针 16 天。",
+      "next": "告知医院真实末次接种日，问清检测项目、方法、时间依据，以及阳性/阴性如何改变后续接种。WSAVA 通用血清学流程针对末次接种至少 4 周后的检测；按此计算为 2026-09-24 起。",
       "escalate": "脸肿/荨麻疹、反复呕吐、呼吸异常、明显虚弱或倒地时立即联系医院或急诊。",
       "source": "03_health/vaccines.md"
     },
@@ -572,22 +648,33 @@
       "dimension": "健康",
       "attention_level": "计划",
       "title": "换牙期口腔护理",
-      "status": "待开始",
-      "observed": "按出生日期推算，小咪在 2026-08-02 约 4 个月 8 天；尚无牙龈、乳牙脱落或双排牙的实际观察。",
-      "next": "疫苗后状态稳定再做口腔脱敏；选猫用软毛小头牙刷和猫用牙膏，牙龈疼痛或掉牙集中期不强刷。",
+      "status": "换牙观察进行中",
+      "observed": "2026-09-05，小咪 5 个月 11 天；主人观察最近先换上牙，随后开始换下牙。具体牙位、乳牙是否脱落和有无双排牙待自然观察。",
+      "next": "每周在放松时掀唇看一次；口腔舒服时用猫用牙膏和软毛小头牙刷做数秒脱敏，掉牙集中或明显疼痛时暂停刷毛。",
       "escalate": "发现双排牙、持续口臭、明显流涎、出血、疼痛或不吃时预约兽医。",
       "source": "06_environment_supplies/grooming.md"
     },
     {
-      "id": "food_transition",
-      "dimension": "营养",
+      "id": "spay_preop_plan",
+      "dimension": "健康",
       "attention_level": "计划",
-      "title": "先完成单一主食换粮",
-      "status": "准备开始",
-      "observed": "皇家 1-4 月龄奶糕接近吃完，家中已有一袋皇家 12 月龄以下幼猫粮；主人另考虑皇家与‘美仕/美士’混喂，具体品牌和 SKU 待确认。",
-      "next": "先按至少 7 天完成两袋皇家之间的换粮，便便、食欲和体重稳定 10-14 天后再单独评估第二品牌。",
-      "escalate": "软便、呕吐或明显拒食时停在当前比例或退回上一步；幼猫持续明显食欲下降应尽快联系兽医。",
-      "source": "04_nutrition/diet_plan.md"
+      "title": "预约绝育术前评估",
+      "status": "2026-09 中下旬为候选窗口",
+      "observed": "小咪 5 个月 11 天，尚未绝育；最近体重约 1.9 kg但精度较低。第三针于 2026-08-27 接种；耳朵和皮肤当前外观稳定，所有药物已停。",
+      "next": "先做体检和准确称重，确认术前血检、低体重患者的禁食/血糖/保温方案、麻醉监护、围术期镇痛和术后照护；体检合格后再定手术日。",
+      "escalate": "发情或可能接触未绝育公猫时提前告知医院；发热、呼吸异常、反复呕吐/腹泻、明显食欲或精神下降时暂停择期手术并先就医。",
+      "source": "03_health/vet_visits.md"
+    },
+    {
+      "id": "stool_adherence_scooting",
+      "dimension": "健康",
+      "attention_level": "中",
+      "title": "排便后粘毛与摩擦需补齐观察",
+      "status": "近期约 2-3 次；待观察",
+      "observed": "主人于 2026-08-27 补充，近期约 2-3 次排便后粪便粘在肛周附近毛上，小咪出盆后会闻一闻并坐着向前摩擦。",
+      "next": "下一次只记便形、是否夹长毛、肛周红肿/疼痛、清洁后是否停止，以及食欲精神和有无呕吐；在这些观察稳定前不同时新增多种食物变量。",
+      "escalate": "持续软便、血便/黑便、排便困难、明显红肿疼痛、清洁后仍反复摩擦，或伴不吃、呕吐、精神差时尽快咨询兽医。",
+      "source": "03_health/symptoms_observations.md"
     },
     {
       "id": "outdoor_desensitization",
@@ -613,6 +700,34 @@
     }
   ],
   "recent_timeline": [
+    {
+      "date": "2026-09-05",
+      "category": "当前状态",
+      "title": "主食、耳朵、皮肤和用药状态更新",
+      "detail": "确认当前吃皇家 12 月龄以下幼猫全价猫粮；耳朵非常干净、未再发现疑似猫癣，所有药物已停用；补充第三针于 2026-08-27 接种；观察到先换上牙、随后开始换下牙；进入绝育术前规划。",
+      "source": "02_daily/logs/2026-09.md"
+    },
+    {
+      "date": "2026-08-27",
+      "category": "预防医疗",
+      "title": "接种第三针疫苗",
+      "detail": "第三针接种日期已确认；疫苗全名、标签、当日体重和 24-48 小时反应待补。9 月 12 日距本次接种 16 天。",
+      "source": "03_health/vaccines.md"
+    },
+    {
+      "date": "2026-08-31",
+      "category": "预防医疗",
+      "title": "记录海乐妙体内驱虫 1 粒",
+      "detail": "23:26 服海乐妙 1 粒；当日一次半干半软便，之后完全正常。产品完整标签和适用体重范围仍待补。",
+      "source": "03_health/deworming_flea_tick.md"
+    },
+    {
+      "date": "2026-08-27",
+      "category": "日常/健康",
+      "title": "连续称重、约 1.9 kg 与粘毛排便观察",
+      "detail": "完成 94 小时 56 分钟猫粮和水碗称重；猫粮碗减少与水碗减少均保留方法限制。主人另补充约 1.9 kg 的抱称差值估计，以及近期约 2-3 次便后粘肛周毛、出盆后坐着向前摩擦。",
+      "source": "02_daily/logs/2026-08.md"
+    },
     {
       "date": "2026-08-02",
       "category": "健康/用药",
@@ -718,6 +833,11 @@
       "group": "记录"
     },
     {
+      "label": "九月日志",
+      "path": "02_daily/logs/2026-09.md",
+      "group": "记录"
+    },
+    {
       "label": "体重与成长",
       "path": "03_health/weight_growth.md",
       "group": "记录"
@@ -740,6 +860,16 @@
     {
       "label": "摄入观察",
       "path": "04_nutrition/intake_observations.md",
+      "group": "记录"
+    },
+    {
+      "label": "饮水记录",
+      "path": "04_nutrition/water_hydration.md",
+      "group": "记录"
+    },
+    {
+      "label": "猫砂盆记录",
+      "path": "05_behavior_training/litter_box.md",
       "group": "记录"
     },
     {

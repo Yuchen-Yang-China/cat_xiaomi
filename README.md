@@ -8,7 +8,7 @@
 
 - [打开小咪的本地看板](dashboard.html)：最直观地查看体重曲线、进食节律、近期记录与待跟进事项。
 - [读当前基线](01_profile/baseline.md)：了解她平时正常是什么样。
-- [看最新日志](02_daily/logs/2026-08.md)：了解最近发生的事情。
+- [看最新日志](02_daily/logs/2026-09.md)：了解最近发生的事情。
 - [打开完整索引](INDEX.md)：按健康、饮食、行为、环境等场景查找文件。
 
 `dashboard.html` 不需要联网，下载仓库后可直接双击打开。它是现有记录的派生视图，不替代原始档案；数据更新后用 `python3 scripts/build_dashboard.py` 重建。
@@ -37,20 +37,20 @@
 
 - [`00_inbox/`](00_inbox/)：暂时还没分类的新信息。
 - [`01_profile/`](01_profile/)：身份、偏好、成长时间线和当前基线。
-- [`02_daily/`](02_daily/)：月度日志、作息和生活变化。
+- [`02_daily/`](02_daily/)：月度日志和生活变化；稳定作息归入当前基线。
 - [`03_health/`](03_health/)：体重、疫苗、驱虫、症状、用药和应急。
 - [`04_nutrition/`](04_nutrition/)：主食、零食、饮水、摄入数据和反应。
 - [`05_behavior_training/`](05_behavior_training/)：行为观察、压力源和训练。
 - [`06_environment_supplies/`](06_environment_supplies/)：环境、清洁、安全、用品与丰容。
 - [`07_knowledge/`](07_knowledge/)：与小咪个人事实分开的通用知识。
-- [`08_questions_decisions/`](08_questions_decisions/)：问题、行动、实验和决策。
+- [`08_questions_decisions/`](08_questions_decisions/)：开放问题、行动和重要决策。
 - [`09_media/`](09_media/)：已脱敏媒体、资料和生成图表。
 - [`10_templates/`](10_templates/)：常用记录模板。
 - [`11_insights/`](11_insights/)：跨维度派生数据和分析报告。
 
 ## 日常维护
 
-1. 新事情先写日期、场景和观察，不急着解释原因。
+1. 新事情先写日期和发生了什么，不急着解释原因；普通日常只记“与平时相比有什么不同”。
 2. 只有真正改变日常基线的信息，才同步到 `01_profile/baseline.md`。
 3. 计划和待确认事项统一放入 `08_questions_decisions/action_queue.md`。
 4. 更新派生数据后运行：
@@ -60,7 +60,10 @@
    python3 scripts/check_repository.py
    ```
 
-5. 提交前检查隐私与变更；远端 `git push` 必须由主人明确确认。
+5. 检查脚本会核对链接、CSV、公开路径、manifest、行动编号、看板同步，以及看板是否落后于最新日常记录。
+6. 提交前检查隐私与变更；远端 `git push` 必须由主人明确确认。
+
+最省事的使用方式是直接告诉智能体：`记一下：日期 + 观察`、`整理一下本周记录`、`小咪现在这样要不要马上就医？`。记录入口和必填信息见 [INDEX.md](INDEX.md#30-秒记一条新信息)。
 
 ## 公开边界
 

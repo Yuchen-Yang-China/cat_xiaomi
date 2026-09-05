@@ -4,7 +4,7 @@
 
 ## 文件
 
-- [`data/current_snapshot.json`](data/current_snapshot.json)：截至 2026-08-23 的机器可读派生快照。
+- [`data/current_snapshot.json`](data/current_snapshot.json)：截至 2026-09-05 的机器可读派生快照。
 - [`reports/2026-07-13_multidimensional_snapshot.md`](reports/2026-07-13_multidimensional_snapshot.md)：截至 2026-07-13 的综合分析日期快照。
 - [`../dashboard.html`](../dashboard.html)：由快照生成的离线总览。
 - [`../scripts/build_dashboard.py`](../scripts/build_dashboard.py)：看板构建与一致性检查脚本。
